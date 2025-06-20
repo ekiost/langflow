@@ -29,6 +29,7 @@ from .inputs import (
     StrInput,
     TabInput,
     TableInput,
+    CustomInput,
     ToolsInput,
 )
 
@@ -64,5 +65,6 @@ __all__ = [
     "StrInput",
     "TabInput",
     "TableInput",
+    "CustomInput",
     "ToolsInput",
 ]

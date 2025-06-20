@@ -106,7 +106,7 @@ dependencies = [
     "arize-phoenix-otel>=0.6.1",
     "openinference-instrumentation-langchain>=0.1.29",
     "crewai==0.102.0",
-    "mcp>=0.9.1",
+    "mcp[cli]>=0.9.1",
     "uv>=0.5.7",
     "scipy>=1.14.1",
     "ag2>=0.1.0",
@@ -125,6 +125,12 @@ dependencies = [
     "cleanlab-tlm>=1.1.2",
     'gassist>=0.0.1; sys_platform == "win32"',
     "twelvelabs>=0.4.7",
+    "requests>=2.32.4",
+    "bs4>=0.0.2",
+    "rapidfuzz>=3.13.0",
+    "tldextract>=5.3.0",
+    "docx2txt>=0.9",
+    "pypdf2>=3.0.1",
 ]
 
 [dependency-groups]

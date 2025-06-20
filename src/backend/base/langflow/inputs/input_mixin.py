@@ -294,6 +294,11 @@ class SliderMixin(BaseModel):
     slider_input: bool = Field(default=False)
 
 
+class ModalMixin(BaseModel):
+    modal: str | None = Field(default=None)
+    """Specifies which modal component to use. Defaults to None."""
+
+
 class TableMixin(BaseModel):
     table_schema: TableSchema | list[Column] | None = None
     trigger_text: str = Field(default="Open table")

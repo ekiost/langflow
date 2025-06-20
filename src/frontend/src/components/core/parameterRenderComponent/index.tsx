@@ -22,6 +22,7 @@ import PromptAreaComponent from "./components/promptComponent";
 import QueryComponent from "./components/queryComponent";
 import { RefreshParameterComponent } from "./components/refreshParameterComponent";
 import SortableListComponent from "./components/sortableListComponent";
+import { StrCustomComponent } from "./components/strCustomComponent";
 import { StrRenderComponent } from "./components/strRenderComponent";
 import ToggleShadComponent from "./components/toggleShadComponent";
 import { InputProps, NodeInfoType } from "./types";
@@ -107,6 +108,26 @@ export function ParameterRenderComponent({
           );
         }
       }
+
+      console.log("template",templateData);
+
+      // Check if this is a CustomInput type and route to StrCustomComponent
+      if (templateData._input_type === "CustomInput") {
+        return (
+          <StrCustomComponent
+            {...baseInputProps}
+            nodeId={nodeId}
+            nodeClass={nodeClass}
+            handleNodeClass={handleNodeClass}
+            templateData={templateData}
+            name={name}
+            display_name={templateData.display_name ?? ""}
+            placeholder={placeholder}
+            modal={templateData.modal}
+          />
+        );
+      }
+
       return (
         <StrRenderComponent
           {...baseInputProps}
