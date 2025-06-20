@@ -60,6 +60,8 @@ export default defineConfig(({ mode }) => {
       proxy: {
         ...proxyTargets,
       },
+      // ADD IN YOUR HOST HERE
+      allowedHosts: ["choonkeat.local"]
     },
   };
 });

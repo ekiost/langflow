@@ -1,4 +1,4 @@
-.PHONY: all init format_backend format_frontend format lint build build_frontend install_frontend run_frontend run_backend dev help tests coverage clean_python_cache clean_npm_cache clean_all
+.PHONY: all init dev format_backend format_frontend format lint build build_frontend install_frontend run_frontend run_backend dev help tests coverage clean_python_cache clean_npm_cache clean_all
 
 # Configurations
 VERSION=$(shell grep "^version" pyproject.toml | sed 's/.*\"\(.*\)\"$$/\1/')
@@ -37,6 +37,7 @@ CLEAR_DIRS = $(foreach dir,$1,$(shell mkdir -p $(dir) && find $(dir) -mindepth 1
 check_tools:
 	@command -v uv >/dev/null 2>&1 || { echo >&2 "$(RED)uv is not installed. Aborting.$(NC)"; exit 1; }
 	@command -v npm >/dev/null 2>&1 || { echo >&2 "$(RED)NPM is not installed. Aborting.$(NC)"; exit 1; }
+	@command -v concurrently >/dev/null 2>&1 || { echo >&2 "$(RED)concurrently is not installed. Aborting.$(NC)"; exit 1; }
 	@echo "$(GREEN)All required tools are installed.$(NC)"
 
 
@@ -82,6 +83,10 @@ init: check_tools clean_python_cache clean_npm_cache ## initialize the project
 	@make build_frontend
 	@echo "$(GREEN)All requirements are installed.$(NC)"
 	@uv run langflow run
+
+dev: ## Run both frontend and backend in development mode
+	@echo "$(GREEN)All requirements are installed.$(NC)"
+	@concurrently --names "FRONTEND,BACKEND" --prefix "[{name}]" "make run_frontend" "make backend"
 
 ######################
 # CLEAN PROJECT
