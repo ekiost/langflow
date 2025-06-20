@@ -14,10 +14,6 @@ interface CustomTextAreaModalProps {
     modal: string | undefined;
 }
 
-// Define the source for the iframe.
-// This should point to the HTML page containing your form.
-const IFRAME_SRC = "/json-form-page.html";
-
 // For security, specify the origin of the iframe's content.
 // If served from the same domain, this is correct. For external domains,
 // use the specific origin (e.g., "https://forms.example.com").
@@ -61,6 +57,7 @@ export default function CustomTextAreaModal({
                                                 disabled = false,
                                                 readonly = false,
                                                 onCloseModal,
+                                                modal,
                                             }: CustomTextAreaModalProps): React.ReactElement {
     const [modalOpen, setModalOpen] = useState(false);
     const [isIframeReady, setIsIframeReady] = useState(false);
@@ -163,7 +160,7 @@ export default function CustomTextAreaModal({
                 </div>
             </BaseModal.Header>
             <BaseModal.Content>
-                <IframeJsonForm ref={iframeRef} src={IFRAME_SRC}/>
+                <IframeJsonForm ref={iframeRef} modal={modal}/>
             </BaseModal.Content>
             <BaseModal.Footer>
                 <div className="flex w-full shrink-0 items-end justify-between">

@@ -1,8 +1,8 @@
 import {GRADIENT_CLASS} from "@/constants/constants";
 import {cn} from "@/utils/utils";
 import React, {ChangeEvent, useMemo, useRef, useState} from "react";
-import IconComponent from "../../../../common/genericIconComponent";
-import {Input} from "../../../../ui/input";
+import IconComponent from "@/components/common/genericIconComponent";
+import {Input} from "@/components/ui/input";
 import {getPlaceholder} from "../../helpers/get-placeholder-disabled";
 import {InputProps, TextAreaComponentType} from "../../types";
 import {getIconName} from "../inputComponent/components/helpers/get-icon-name";

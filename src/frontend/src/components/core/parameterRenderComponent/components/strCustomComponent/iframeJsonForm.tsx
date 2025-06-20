@@ -1,8 +1,8 @@
 import React, {forwardRef} from "react";
 
 interface IframeJsonFormProps {
-    // The URL of the page to be loaded in the iframe.
-    src: string;
+    ref: React.Ref<HTMLIFrameElement>;
+    modal?: string | undefined
 }
 
 /**
@@ -10,11 +10,18 @@ interface IframeJsonFormProps {
  * It is styled to fit within the modal content area.
  */
 const IframeJsonForm = forwardRef<HTMLIFrameElement, IframeJsonFormProps>(
-    ({src}, ref) => {
+    (modal, ref) => {
+        const get_iframe_source = () => {
+            switch (modal) {
+                default:
+                    return "/json-form-page.html"
+            }
+        }
+
         return (
             <iframe
                 ref={ref}
-                src={src}
+                src={get_iframe_source()}
                 title="JSON Configuration Form"
                 style={{
                     width: "100%",
