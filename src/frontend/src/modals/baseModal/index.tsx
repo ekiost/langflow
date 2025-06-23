@@ -190,6 +190,8 @@ interface BaseModalProps {
     | "smaller-h-full"
     | "medium-log"
     | "x-large";
+  customWidth?: string;
+  customHeight?: string;
   className?: string;
   disable?: boolean;
   onChangeOpenModal?: (open?: boolean) => void;
@@ -205,6 +207,8 @@ function BaseModal({
   setOpen,
   children,
   size = "large",
+  customWidth,
+  customHeight,
   onChangeOpenModal,
   type = "dialog",
   onSubmit,
@@ -241,6 +245,21 @@ function BaseModal({
     </>
   );
 
+  // Apply custom dimensions if provided
+  const customStyles: React.CSSProperties = {};
+  if (customWidth) {
+    customStyles.width = customWidth;
+    customStyles.minWidth = customWidth;
+    customStyles.maxWidth = customWidth;
+    minWidth = ''; // Clear the size-based width
+  }
+  if (customHeight) {
+    customStyles.height = customHeight;
+    customStyles.minHeight = customHeight;
+    customStyles.maxHeight = customHeight;
+    height = ''; // Clear the size-based height
+  }
+
   const contentClasses = cn(
     minWidth,
     height,
@@ -256,7 +275,7 @@ function BaseModal({
       {type === "modal" ? (
         <Modal open={open} onOpenChange={setOpen}>
           {triggerChild}
-          <ModalContent className={contentClasses}>{modalContent}</ModalContent>
+          <ModalContent className={contentClasses} style={customStyles}>{modalContent}</ModalContent>
         </Modal>
       ) : type === "full-screen" ? (
         <div className="min-h-full w-full flex-1 overflow-hidden">
@@ -272,6 +291,7 @@ function BaseModal({
               onEscapeKeyDown={onEscapeKeyDown}
               className={contentClasses}
               closeButtonClassName={closeButtonClassName}
+              style={customStyles}
             >
               {onSubmit ? (
                 <Form.Root
@@ -294,6 +314,7 @@ function BaseModal({
               onEscapeKeyDown={onEscapeKeyDown}
               className={contentClasses}
               closeButtonClassName={closeButtonClassName}
+              style={customStyles}
             >
               {onSubmit ? (
                 <Form.Root
