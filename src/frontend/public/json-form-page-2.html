@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>JSON Configuration Form</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: {} }
+        }
+    </script>
+    <style>
+        textarea { min-height: 80px; resize: vertical; }
+    </style>
+</head>
+<body class="bg-transparent text-gray-900 dark:text-gray-200 transition-colors duration-300 font-sans min-h-screen flex items-center justify-center">
+    <main class="w-full max-w-lg mx-auto p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+        <header class="mb-6">
+            <h1 class="text-2xl font-bold mb-1">JSON Configuration</h1>
+            <p class="text-gray-500 dark:text-gray-400 text-sm">Fill out the fields below to configure your input.</p>
+        </header>
+        <form id="json-config-form" class="space-y-5" autocomplete="off">
+            <div>
+                <label for="name-input" class="block font-semibold text-sm mb-1">Name</label>
+                <input id="name-input" name="name" type="text" placeholder="e.g., api_key"
+                    class="w-full p-2.5 border border-gray-300 rounded-md text-base bg-white text-gray-900 transition-colors duration-300 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" />
+            </div>
+            <div>
+                <label for="type-select" class="block font-semibold text-sm mb-1">Type</label>
+                <select id="type-select" name="type"
+                    class="w-full p-2.5 border border-gray-300 rounded-md text-base bg-white text-gray-900 transition-colors duration-300 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600">
+                    <option value="string">String</option>
+                    <option value="number">Number</option>
+                    <option value="boolean">Boolean</option>
+                    <option value="json">JSON</option>
+                </select>
+            </div>
+            <div>
+                <label for="description-input" class="block font-semibold text-sm mb-1">Description</label>
+                <textarea id="description-input" name="description" placeholder="Describe the purpose of this input"
+                    class="w-full p-2.5 border border-gray-300 rounded-md text-base bg-white text-gray-900 transition-colors duration-300 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"></textarea>
+            </div>
+            <div>
+                <label for="value-input" class="block font-semibold text-sm mb-1">Value</label>
+                <textarea id="value-input" name="value" placeholder="Enter the value for this input"
+                    class="w-full p-2.5 border border-gray-300 rounded-md text-base bg-white text-gray-900 transition-colors duration-300 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"></textarea>
+            </div>
+        </form>
+    </main>
+    <script>
+        // --- CONFIGURATION ---
+        const PARENT_ORIGIN = new URL(document.referrer).origin;
+
+        // --- DOM ELEMENT REFERENCES ---
+        const nameInput = document.getElementById("name-input");
+        const typeSelect = document.getElementById("type-select");
+        const descriptionInput = document.getElementById("description-input");
+        const valueInput = document.getElementById("value-input");
+
+        // --- HELPER FUNCTIONS ---
+        function getFormData() {
+            return {
+                name: nameInput.value,
+                type: typeSelect.value,
+                description: descriptionInput.value,
+                value: valueInput.value,
+            };
+        }
+        function populateForm(data = {}) {
+            nameInput.value = data.name || "";
+            typeSelect.value = data.type || "string";
+            descriptionInput.value = data.description || "";
+            valueInput.value = data.value || "";
+        }
+        function resetForm() { populateForm(); }
+        function sendSaveData() {
+            const formData = getFormData();
+            window.parent.postMessage({type: "save", payload: formData}, PARENT_ORIGIN);
+        }
+
+        // --- MESSAGE HANDLING LOGIC ---
+        window.addEventListener("message", (event) => {
+            if (event.origin !== PARENT_ORIGIN) {
+                console.warn(`Message from untrusted origin '${event.origin}' was ignored.`);
+                return;
+            }
+            const {type, payload} = event.data;
+            switch (type) {
+                case "load":
+                    populateForm(payload);
+                    break;
+                case "reset":
+                    resetForm();
+                    break;
+                case "requestSave":
+                    sendSaveData();
+                    break;
+                case "darkMode":
+                    if (payload && payload.dark) {
+                        document.body.classList.add("dark");
+                    } else {
+                        document.body.classList.remove("dark");
+                    }
+                    break;
+                default:
+                    console.warn(`IFRAME: Received unknown message type: '${type}'`);
+            }
+        });
+
+        // --- INITIALIZATION ---
+        window.parent.postMessage({type: "ready", width: "800px", height: "500px"}, PARENT_ORIGIN);
+    </script>
