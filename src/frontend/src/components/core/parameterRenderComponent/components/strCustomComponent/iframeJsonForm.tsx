@@ -11,16 +11,16 @@ interface IframeJsonFormProps {
  * It is styled to fit within the modal content area.
  */
 const IframeJsonForm = forwardRef<HTMLIFrameElement, IframeJsonFormProps>((props, ref) => {
-    const get_iframe_source = () => {
-        switch (props.modal) {
-            default:
-                return "/json-form-page.html"
-        }
-    }
+    // const get_iframe_source = () => {
+    //     switch (props.modal) {
+    //         default:
+    //             return "/json-form-page.html"
+    //     }
+    // }
 
     return (<iframe
         ref={ref}
-        src={get_iframe_source()}
+        src={props.modal}
         title="JSON Configuration Form"
         style={{
             width: "100%", height: "100%",
