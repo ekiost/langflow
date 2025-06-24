@@ -2,7 +2,7 @@ import LangflowLogo from "@/assets/LangflowLogo.svg?react";
 import { useLoginUser } from "@/controllers/API/queries/auth";
 import { CustomLink } from "@/customization/components/custom-link";
 import * as Form from "@radix-ui/react-form";
-import { useContext, useState } from "react";
+import {useContext, useEffect, useState} from "react";
 import InputComponent from "../../components/core/parameterRenderComponent/components/inputComponent";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
@@ -50,6 +50,59 @@ export default function LoginPage(): JSX.Element {
       },
     });
   }
+
+  useEffect(() => {
+    // You can define the origin here or get it from an environment variable
+    const PARENT_ORIGIN = 'http://localhost:3000'; // Change to your parent page's actual origin
+
+    // 1. Announce that the iframe is ready for credentials
+    console.log("Iframe is ready, announcing to parent.");
+    window.parent.postMessage({ type: 'ready' }, PARENT_ORIGIN);
+
+    // 2. Set up the listener for the parent's response
+    const handleMessage = (event: MessageEvent) => {
+      // Security: always verify the message origin
+      if (event.origin !== PARENT_ORIGIN) {
+        console.warn(`Message from untrusted origin ignored: ${event.origin}`);
+        return;
+      }
+
+      const { type, credentials } = event.data;
+
+      // 3. If we receive credentials, perform the login directly
+      if (type === 'credentials' && credentials) {
+        console.log('Received credentials from parent. Attempting to log in.');
+
+        // The performLogin logic is now an anonymous function here
+        mutate(
+          {
+            username: credentials.username,
+            password: credentials.password,
+          },
+          {
+            onSuccess: (data) => {
+              login(data.access_token, "login", data.refresh_token);
+            },
+            onError: (error) => {
+              console.error("Iframe login failed:", error);
+              setErrorData({
+                title: "Iframe Login Failed",
+                list: [error?.response?.data?.detail ?? "An unknown error occurred."],
+              });
+            },
+          }
+        );
+      }
+    };
+
+    // 4. Add the event listener
+    window.addEventListener('message', handleMessage);
+
+    // 5. Clean up the listener when the component unmounts
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
+  }, [mutate, login, setErrorData]); // Dependencies remain, as they are now used directly inside the effect
 
   return (
     <Form.Root
