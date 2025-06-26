@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import iframeSources from "/home/victor/Programming/dev_langflow/langflow/src/frontend/public/iframeSources.json"; // Import the sources for the iframes
+import iframeSources from "./../../../../../../public/iframeSources.json" // Import the sources for the iframes
 
 interface IframeJsonFormProps {
   ref: React.Ref<HTMLIFrameElement>;
