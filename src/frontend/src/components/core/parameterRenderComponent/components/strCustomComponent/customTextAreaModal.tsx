@@ -1,243 +1,185 @@
 import IconComponent from "@/components/common/genericIconComponent";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
+import {Button} from "@/components/ui/button";
 import BaseModal from "@/modals/baseModal";
-import { classNames } from "@/utils/utils";
-import React, { ReactNode, useEffect, useRef, useState } from "react";
+import React, {ReactNode, useEffect, useRef, useState} from "react";
+import IframeJsonForm from "./iframeJsonForm"; // Import the new iframe component
 
 interface CustomTextAreaModalProps {
-  value: string;
-  setValue: (value: string) => void;
-  children: ReactNode;
-  disabled?: boolean;
-  readonly?: boolean;
-  onCloseModal?: () => void;
+    value: string;
+    setValue: (value: string) => void;
+    children: ReactNode;
+    disabled?: boolean;
+    readonly?: boolean;
+    onCloseModal?: () => void;
+    modal: string | undefined;
 }
 
-interface FormData {
-  name: string;
-  type: string;
-  description: string;
-  value: string;
-}
+// For security, specify the origin of the iframe's content.
+// If served from the same domain, this is correct. For external domains,
+// use the specific origin (e.g., "https://forms.example.com").
+const IFRAME_ORIGIN = window.location.origin;
 
-const FIELD_TYPES = [
-  { value: "string", label: "String" },
-  { value: "number", label: "Number" },
-  {
-    value: "boolean",
-    label: "Boolean",
-  },
-  { value: "array", label: "Array" },
-  { value: "object", label: "Object" },
-];
+/*
+  IMPORTANT: The page hosted at IFRAME_SRC (`/json-form-page.html`) needs to
+  implement the other side of this communication channel.
+
+  The iframe's JavaScript should:
+  1. Listen for messages from this parent window.
+     window.addEventListener('message', (event) => {
+       // Verify the message is from the expected parent origin
+       if (event.origin !== IFRAME_ORIGIN) return;
+
+       const { type, payload } = event.data;
+       if (type === 'load') {
+         // Use payload to populate the form fields
+         // e.g., document.getElementById('name').value = payload.name;
+       } else if (type === 'reset') {
+         // Clear all form fields
+       }
+     });
+
+  2. Send messages back to the parent window.
+     // After its own scripts have loaded, tell the parent it's ready
+     window.parent.postMessage({ type: 'ready' }, IFRAME_ORIGIN);
+
+     // On save, send the form data
+     const formData = { name: '...', type: '...', description: '...', value: '...' };
+     window.parent.postMessage({ type: 'save', payload: formData }, IFRAME_ORIGIN);
+
+     // On cancel, just notify the parent
+     window.parent.postMessage({ type: 'cancel' }, IFRAME_ORIGIN);
+*/
 
 export default function CustomTextAreaModal({
-  value,
-  setValue,
-  children,
-  disabled = false,
-  readonly = false,
-  onCloseModal,
-}: CustomTextAreaModalProps): React.ReactElement {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    type: "string",
-    description: "",
-    value: "",
-  });
+                                                value,
+                                                setValue,
+                                                children,
+                                                disabled = false,
+                                                readonly = false,
+                                                onCloseModal,
+                                                modal,
+                                            }: CustomTextAreaModalProps): React.ReactElement {
+    const [modalOpen, setModalOpen] = useState(false);
+    const [isIframeReady, setIsIframeReady] = useState(false);
+    const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  const nameRef = useRef<HTMLInputElement>(null);
+    // Effect to handle messages received from the iframe
+    useEffect(() => {
+        const handleMessage = (event: MessageEvent) => {
+            if (event.origin !== IFRAME_ORIGIN) return;
 
-  useEffect(() => {
-    if (modalOpen) {
-      // Try to parse an existing value if it's JSON
-      try {
-        if (value && value.trim()) {
-          const parsed = JSON.parse(value);
-          if (typeof parsed === "object" && parsed !== null) {
-            setFormData({
-              name: parsed.name || "",
-              type: parsed.type || "string",
-              description: parsed.description || "",
-              value: parsed.value || "",
-            });
-          }
+            const data = event.data;
+            if (!data || typeof data.type !== "string") return;
+
+            switch (data.type) {
+                case "ready":
+                    setIsIframeReady(true);
+                    break;
+                case "save":
+                    handleSave(data.payload);
+                    break;
+                case "cancel":
+                    setModalOpen(false);
+                    break;
+            }
+        };
+
+        if (modalOpen) {
+            window.addEventListener("message", handleMessage);
         }
-      } catch {
-        // If not valid JSON, reset to default
-        setFormData({
-          name: "",
-          type: "string",
-          description: "",
-          value: "",
-        });
-      }
-    }
-  }, [value, modalOpen]);
 
-  useEffect(() => {
-    if (!modalOpen) {
-      onCloseModal?.();
-    }
-  }, [modalOpen, onCloseModal]);
+        return () => {
+            window.removeEventListener("message", handleMessage);
+            setIsIframeReady(false); // Reset on close
+        };
+    }, [modalOpen]);
 
-  const handleInputChange = (field: keyof FormData, newValue: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      [field]: newValue,
-    }));
-  };
+    // Effect to send the initial data to the iframe once it's ready
+    useEffect(() => {
+        if (modalOpen && isIframeReady && iframeRef.current?.contentWindow) {
+            try {
+                const initialData = value && value.trim() ? JSON.parse(value) : {};
+                iframeRef.current.contentWindow.postMessage({type: "load", payload: initialData}, IFRAME_ORIGIN,);
+            } catch (e) {
+                console.error("Failed to parse initial value for iframe:", e);
+                iframeRef.current.contentWindow.postMessage({type: "load", payload: {}}, IFRAME_ORIGIN,);
+            }
+        }
+    }, [modalOpen, isIframeReady, value]);
 
-  const handleSave = () => {
-    const jsonOutput = JSON.stringify(formData);
-    setValue(jsonOutput);
-    setModalOpen(false);
-  };
+    useEffect(() => {
+        if (!modalOpen) {
+            onCloseModal?.();
+        }
+    }, [modalOpen, onCloseModal]);
 
-  const handleReset = () => {
-    setFormData({
-      name: "",
-      type: "string",
-      description: "",
-      value: "",
-    });
-  };
+    const handleSave = (formData: any) => {
+        const jsonOutput = JSON.stringify(formData, null, 2); // Pretty-print JSON
+        setValue(jsonOutput);
+        setModalOpen(false);
+    };
 
-  return (
-    <BaseModal
-      onChangeOpenModal={() => {}}
-      open={modalOpen}
-      setOpen={setModalOpen}
-      size="large"
-    >
-      <BaseModal.Trigger disable={disabled} asChild>
-        {children}
-      </BaseModal.Trigger>
-      <BaseModal.Header>
-        <div className="flex w-full items-start gap-3">
-          <div className="flex">
-            <IconComponent
-              name="Settings"
-              className="h-6 w-6 pr-1 text-primary"
-              aria-hidden="true"
-            />
-            <span className="pl-2" data-testid="custom-modal-title">
-              Configure JSON Input
+    const handleReset = () => {
+        if (iframeRef.current?.contentWindow) {
+            iframeRef.current.contentWindow.postMessage({type: "reset"}, IFRAME_ORIGIN,);
+        }
+    };
+
+    return (<BaseModal
+            onChangeOpenModal={() => {
+            }}
+            open={modalOpen}
+            setOpen={setModalOpen}
+            size="large"
+        >
+            <BaseModal.Trigger disable={disabled} asChild>
+                {children}
+            </BaseModal.Trigger>
+            <BaseModal.Header>
+                <div className="flex w-full items-start gap-3">
+                    <div className="flex">
+                        <IconComponent
+                            name="Settings"
+                            className="h-6 w-6 pr-1 text-primary"
+                            aria-hidden="true"
+                        />
+                        <span className="pl-2" data-testid="custom-modal-title">
+              Configure Input
             </span>
-          </div>
-        </div>
-      </BaseModal.Header>
-      <BaseModal.Content>
-        <div className="flex h-full w-full flex-col gap-4 p-4">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="field-name">Field Name</Label>
-              <Input
-                id="field-name"
-                ref={nameRef}
-                placeholder="Enter field name"
-                value={formData.name}
-                onChange={(e) => handleInputChange("name", e.target.value)}
-                disabled={readonly}
-                data-testid="field-name-input"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="field-type">Field Type</Label>
-              <Select
-                value={formData.type}
-                onValueChange={(value) => handleInputChange("type", value)}
-                disabled={readonly}
-              >
-                <SelectTrigger id="field-type" data-testid="field-type-select">
-                  <SelectValue placeholder="Select type" />
-                </SelectTrigger>
-                <SelectContent>
-                  {FIELD_TYPES.map((type) => (
-                    <SelectItem key={type.value} value={type.value}>
-                      {type.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="field-description">Description</Label>
-            <Input
-              id="field-description"
-              placeholder="Enter field description"
-              value={formData.description}
-              onChange={(e) => handleInputChange("description", e.target.value)}
-              disabled={readonly}
-              data-testid="field-description-input"
-            />
-          </div>
-
-          <div className="flex-1 space-y-2">
-            <Label htmlFor="field-value">Value</Label>
-            <Textarea
-              id="field-value"
-              className={classNames(
-                "h-full min-h-[200px] resize-none",
-                "focus-visible:ring-1",
-              )}
-              placeholder="Enter field value"
-              value={formData.value}
-              onChange={(e) => handleInputChange("value", e.target.value)}
-              readOnly={readonly}
-              data-testid="field-value-textarea"
-            />
-          </div>
-
-          <div className="rounded-md bg-muted p-3">
-            <Label className="text-sm font-medium">Preview JSON:</Label>
-            <pre className="mt-2 text-xs text-muted-foreground">
-              {JSON.stringify(formData, null, 2)}
-            </pre>
-          </div>
-        </div>
-      </BaseModal.Content>
-      <BaseModal.Footer>
-        <div className="flex w-full shrink-0 items-end justify-between">
-          <Button
-            variant="outline"
-            onClick={handleReset}
-            disabled={readonly}
-            data-testid="reset-button"
-          >
-            Reset
-          </Button>
-          <div className="flex gap-2">
-            <Button
-              variant="outline"
-              onClick={() => setModalOpen(false)}
-              data-testid="cancel-button"
-            >
-              Cancel
-            </Button>
-            <Button
-              onClick={handleSave}
-              disabled={readonly}
-              data-testid="save-button"
-            >
-              Save JSON
-            </Button>
-          </div>
-        </div>
-      </BaseModal.Footer>
-    </BaseModal>
-  );
+                    </div>
+                </div>
+            </BaseModal.Header>
+            <BaseModal.Content>
+                <IframeJsonForm ref={iframeRef} modal={modal}/>
+            </BaseModal.Content>
+            <BaseModal.Footer>
+                <div className="flex w-full shrink-0 items-end justify-between">
+                    <Button
+                        variant="outline"
+                        onClick={handleReset}
+                        disabled={readonly}
+                        data-testid="reset-button"
+                    >
+                        Reset
+                    </Button>
+                    <div className="flex gap-2">
+                        <Button
+                            variant="outline"
+                            onClick={() => setModalOpen(false)}
+                            data-testid="cancel-button"
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            onClick={() => iframeRef.current?.contentWindow?.postMessage({type: "requestSave"}, // Ask iframe to save
+                                IFRAME_ORIGIN,)}
+                            disabled={readonly}
+                            data-testid="save-button"
+                        >
+                            Save JSON
+                        </Button>
+                    </div>
+                </div>
+            </BaseModal.Footer>
+        </BaseModal>);
 }
