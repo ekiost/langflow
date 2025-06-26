@@ -27,6 +27,7 @@ from langflow.inputs import (
     TabInput,
     TableInput,
     ToolsInput,
+    CustomInput,
 )
 from langflow.template import Output
 
@@ -61,4 +62,5 @@ __all__ = [
     "TabInput",
     "TableInput",
     "ToolsInput",
+    "CustomInput",
 ]

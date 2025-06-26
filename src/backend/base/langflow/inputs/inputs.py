@@ -10,6 +10,7 @@ from langflow.schema.data import Data
 from langflow.schema.message import Message
 from langflow.services.database.models.message.model import MessageBase
 from langflow.template.field.base import Input
+from .custom import CustomInput
 
 from .input_mixin import (
     AuthMixin,
@@ -689,6 +690,7 @@ InputTypes: TypeAlias = (
     | SliderInput
     | DataFrameInput
     | TabInput
+    | CustomInput
 )
 
 InputTypesMap: dict[str, type[InputTypes]] = {t.__name__: t for t in get_args(InputTypes)}

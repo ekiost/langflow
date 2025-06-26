@@ -99,6 +99,7 @@ export type StrRenderComponentType = {
   nodeId: string;
   nodeClass: APIClassType;
   handleNodeClass: (value: any, code?: string, type?: string) => void;
+  modal?: string;
 };
 
 export type InputListComponentType = {
@@ -124,6 +125,7 @@ export type DropDownComponentType = {
 export type TextAreaComponentType = {
   password?: boolean;
   updateVisibility?: () => void;
+  modal?: string;
 };
 
 export type QueryComponentType = {

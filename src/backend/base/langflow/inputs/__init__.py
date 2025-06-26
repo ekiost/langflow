@@ -30,6 +30,7 @@ from .inputs import (
     TabInput,
     TableInput,
     ToolsInput,
+    CustomInput,
 )
 
 __all__ = [
@@ -65,4 +66,5 @@ __all__ = [
     "TabInput",
     "TableInput",
     "ToolsInput",
+    "CustomInput",
 ]
