@@ -176,7 +176,7 @@ export default function CustomTextAreaModal({
             //   </div>
             // </div>
             <div className="absolute inset-0 z-20 flex items-center justify-center bg-white">
-              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/pKl61ks-Y3s?si=t9J8GeL2GEdf1iC-&autoplay=1" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/pKl61ks-Y3s?si=t9J8GeL2GEdf1iC-&autoplay=1" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
             </div>
           )}
           <IframeJsonForm
