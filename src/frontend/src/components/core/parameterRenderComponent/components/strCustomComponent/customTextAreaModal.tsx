@@ -170,13 +170,10 @@ export default function CustomTextAreaModal({
           {" "}
           {/* adjust height if needed */}
           {isIframeLoading && (
-            // <div className="absolute inset-0 z-10 flex items-center justify-center bg-white backdrop-blur-sm">
-            //   <div className="animate-pulse text-sm text-gray-600">
-            //     Loading iframe...
-            //   </div>
-            // </div>
-            <div className="absolute inset-0 z-20 flex items-center justify-center bg-white">
-              <iframe width="100%" height="100%" src="https://www.youtube.com/embed/pKl61ks-Y3s?si=t9J8GeL2GEdf1iC-&autoplay=1" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+            <div className="absolute inset-0 z-10 flex items-center justify-center bg-white backdrop-blur-sm">
+              <div className="animate-pulse text-sm text-gray-600">
+                Loading iframe...
+              </div>
             </div>
           )}
           <IframeJsonForm
