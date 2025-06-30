@@ -103,6 +103,7 @@ class LocalStorageService(StorageService):
         :param file_name: The name of the file to be deleted.
         """
         file_path = self.data_dir / flow_id / file_name
+
         if await file_path.exists():
             await file_path.unlink()
             logger.info(f"File {file_name} deleted successfully from flow {flow_id}.")
