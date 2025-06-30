@@ -1,0 +1,2499 @@
+{
+  "data": {
+    "edges": [
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "ChatInput",
+            "id": "ChatInput-exl61",
+            "name": "message",
+            "output_types": [
+              "Message"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "input_value",
+            "id": "JsonKeyExtractor-1EGr7",
+            "inputTypes": [
+              "Message"
+            ],
+            "type": "str"
+          }
+        },
+        "id": "reactflow__edge-ChatInput-exl61{œdataTypeœ:œChatInputœ,œidœ:œChatInput-exl61œ,œnameœ:œmessageœ,œoutput_typesœ:[œMessageœ]}-JsonKeyExtractor-1EGr7{œfieldNameœ:œinput_valueœ,œidœ:œJsonKeyExtractor-1EGr7œ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
+        "selected": false,
+        "source": "ChatInput-exl61",
+        "sourceHandle": "{œdataTypeœ: œChatInputœ, œidœ: œChatInput-exl61œ, œnameœ: œmessageœ, œoutput_typesœ: [œMessageœ]}",
+        "target": "JsonKeyExtractor-1EGr7",
+        "targetHandle": "{œfieldNameœ: œinput_valueœ, œidœ: œJsonKeyExtractor-1EGr7œ, œinputTypesœ: [œMessageœ], œtypeœ: œstrœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "DocumentFileComponent",
+            "id": "DocumentFileComponent-l0T0E",
+            "name": "data",
+            "output_types": [
+              "Data"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "data_inputs",
+            "id": "SplitText-ifi10",
+            "inputTypes": [
+              "Data",
+              "DataFrame"
+            ],
+            "type": "other"
+          }
+        },
+        "id": "reactflow__edge-DocumentFileComponent-l0T0E{œdataTypeœ:œDocumentFileComponentœ,œidœ:œDocumentFileComponent-l0T0Eœ,œnameœ:œdataœ,œoutput_typesœ:[œDataœ]}-SplitText-ifi10{œfieldNameœ:œdata_inputsœ,œidœ:œSplitText-ifi10œ,œinputTypesœ:[œDataœ,œDataFrameœ],œtypeœ:œotherœ}",
+        "selected": false,
+        "source": "DocumentFileComponent-l0T0E",
+        "sourceHandle": "{œdataTypeœ: œDocumentFileComponentœ, œidœ: œDocumentFileComponent-l0T0Eœ, œnameœ: œdataœ, œoutput_typesœ: [œDataœ]}",
+        "target": "SplitText-ifi10",
+        "targetHandle": "{œfieldNameœ: œdata_inputsœ, œidœ: œSplitText-ifi10œ, œinputTypesœ: [œDataœ, œDataFrameœ], œtypeœ: œotherœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "JsonKeyExtractor",
+            "id": "JsonKeyExtractor-1EGr7",
+            "name": "value",
+            "output_types": [
+              "Message"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "input_value",
+            "id": "DocumentFileComponent-l0T0E",
+            "inputTypes": [
+              "Message"
+            ],
+            "type": "str"
+          }
+        },
+        "id": "reactflow__edge-JsonKeyExtractor-1EGr7{œdataTypeœ:œJsonKeyExtractorœ,œidœ:œJsonKeyExtractor-1EGr7œ,œnameœ:œvalueœ,œoutput_typesœ:[œMessageœ]}-DocumentFileComponent-l0T0E{œfieldNameœ:œinput_valueœ,œidœ:œDocumentFileComponent-l0T0Eœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
+        "selected": false,
+        "source": "JsonKeyExtractor-1EGr7",
+        "sourceHandle": "{œdataTypeœ: œJsonKeyExtractorœ, œidœ: œJsonKeyExtractor-1EGr7œ, œnameœ: œvalueœ, œoutput_typesœ: [œMessageœ]}",
+        "target": "DocumentFileComponent-l0T0E",
+        "targetHandle": "{œfieldNameœ: œinput_valueœ, œidœ: œDocumentFileComponent-l0T0Eœ, œinputTypesœ: [œMessageœ], œtypeœ: œstrœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "ChatInput",
+            "id": "ChatInput-exl61",
+            "name": "message",
+            "output_types": [
+              "Message"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "input_value",
+            "id": "JsonKeyExtractor-ZhxtU",
+            "inputTypes": [
+              "Message"
+            ],
+            "type": "str"
+          }
+        },
+        "id": "reactflow__edge-ChatInput-exl61{œdataTypeœ:œChatInputœ,œidœ:œChatInput-exl61œ,œnameœ:œmessageœ,œoutput_typesœ:[œMessageœ]}-JsonKeyExtractor-ZhxtU{œfieldNameœ:œinput_valueœ,œidœ:œJsonKeyExtractor-ZhxtUœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
+        "selected": false,
+        "source": "ChatInput-exl61",
+        "sourceHandle": "{œdataTypeœ: œChatInputœ, œidœ: œChatInput-exl61œ, œnameœ: œmessageœ, œoutput_typesœ: [œMessageœ]}",
+        "target": "JsonKeyExtractor-ZhxtU",
+        "targetHandle": "{œfieldNameœ: œinput_valueœ, œidœ: œJsonKeyExtractor-ZhxtUœ, œinputTypesœ: [œMessageœ], œtypeœ: œstrœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "JsonKeyExtractor",
+            "id": "JsonKeyExtractor-ZhxtU",
+            "name": "value",
+            "output_types": [
+              "Message"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "title",
+            "id": "Prompt-A6bEI",
+            "inputTypes": [
+              "Message"
+            ],
+            "type": "str"
+          }
+        },
+        "id": "reactflow__edge-JsonKeyExtractor-ZhxtU{œdataTypeœ:œJsonKeyExtractorœ,œidœ:œJsonKeyExtractor-ZhxtUœ,œnameœ:œvalueœ,œoutput_typesœ:[œMessageœ]}-Prompt-A6bEI{œfieldNameœ:œtitleœ,œidœ:œPrompt-A6bEIœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
+        "selected": false,
+        "source": "JsonKeyExtractor-ZhxtU",
+        "sourceHandle": "{œdataTypeœ: œJsonKeyExtractorœ, œidœ: œJsonKeyExtractor-ZhxtUœ, œnameœ: œvalueœ, œoutput_typesœ: [œMessageœ]}",
+        "target": "Prompt-A6bEI",
+        "targetHandle": "{œfieldNameœ: œtitleœ, œidœ: œPrompt-A6bEIœ, œinputTypesœ: [œMessageœ], œtypeœ: œstrœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "JsonKeyExtractor",
+            "id": "JsonKeyExtractor-ZhxtU",
+            "name": "value",
+            "output_types": [
+              "Message"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "title",
+            "id": "Prompt-z865m",
+            "inputTypes": [
+              "Message"
+            ],
+            "type": "str"
+          }
+        },
+        "id": "reactflow__edge-JsonKeyExtractor-ZhxtU{œdataTypeœ:œJsonKeyExtractorœ,œidœ:œJsonKeyExtractor-ZhxtUœ,œnameœ:œvalueœ,œoutput_typesœ:[œMessageœ]}-Prompt-z865m{œfieldNameœ:œtitleœ,œidœ:œPrompt-z865mœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
+        "selected": false,
+        "source": "JsonKeyExtractor-ZhxtU",
+        "sourceHandle": "{œdataTypeœ: œJsonKeyExtractorœ, œidœ: œJsonKeyExtractor-ZhxtUœ, œnameœ: œvalueœ, œoutput_typesœ: [œMessageœ]}",
+        "target": "Prompt-z865m",
+        "targetHandle": "{œfieldNameœ: œtitleœ, œidœ: œPrompt-z865mœ, œinputTypesœ: [œMessageœ], œtypeœ: œstrœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "SplitText",
+            "id": "SplitText-ifi10",
+            "name": "chunks",
+            "output_types": []
+          },
+          "targetHandle": {
+            "fieldName": "contract_chunks",
+            "id": "ContractSummarizer-xEf8m",
+            "inputTypes": [
+              "Data"
+            ],
+            "type": "other"
+          }
+        },
+        "id": "reactflow__edge-SplitText-ifi10{œdataTypeœ:œSplitTextœ,œidœ:œSplitText-ifi10œ,œnameœ:œchunksœ,œoutput_typesœ:[œDataœ]}-ContractSummarizer-xEf8m{œfieldNameœ:œcontract_chunksœ,œidœ:œContractSummarizer-xEf8mœ,œinputTypesœ:[œDataœ],œtypeœ:œotherœ}",
+        "selected": false,
+        "source": "SplitText-ifi10",
+        "sourceHandle": "{œdataTypeœ: œSplitTextœ, œidœ: œSplitText-ifi10œ, œnameœ: œchunksœ, œoutput_typesœ: []}",
+        "target": "ContractSummarizer-xEf8m",
+        "targetHandle": "{œfieldNameœ: œcontract_chunksœ, œidœ: œContractSummarizer-xEf8mœ, œinputTypesœ: [œDataœ], œtypeœ: œotherœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "Prompt",
+            "id": "Prompt-A6bEI",
+            "name": "prompt",
+            "output_types": [
+              "Message"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "initial_summary_prompt",
+            "id": "ContractSummarizer-xEf8m",
+            "inputTypes": [
+              "Message"
+            ],
+            "type": "str"
+          }
+        },
+        "id": "reactflow__edge-Prompt-A6bEI{œdataTypeœ:œPromptœ,œidœ:œPrompt-A6bEIœ,œnameœ:œpromptœ,œoutput_typesœ:[œMessageœ]}-ContractSummarizer-xEf8m{œfieldNameœ:œinitial_summary_promptœ,œidœ:œContractSummarizer-xEf8mœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
+        "selected": false,
+        "source": "Prompt-A6bEI",
+        "sourceHandle": "{œdataTypeœ: œPromptœ, œidœ: œPrompt-A6bEIœ, œnameœ: œpromptœ, œoutput_typesœ: [œMessageœ]}",
+        "target": "ContractSummarizer-xEf8m",
+        "targetHandle": "{œfieldNameœ: œinitial_summary_promptœ, œidœ: œContractSummarizer-xEf8mœ, œinputTypesœ: [œMessageœ], œtypeœ: œstrœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "Prompt",
+            "id": "Prompt-z865m",
+            "name": "prompt",
+            "output_types": [
+              "Message"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "refinement_prompt",
+            "id": "ContractSummarizer-xEf8m",
+            "inputTypes": [
+              "Message"
+            ],
+            "type": "str"
+          }
+        },
+        "id": "reactflow__edge-Prompt-z865m{œdataTypeœ:œPromptœ,œidœ:œPrompt-z865mœ,œnameœ:œpromptœ,œoutput_typesœ:[œMessageœ]}-ContractSummarizer-xEf8m{œfieldNameœ:œrefinement_promptœ,œidœ:œContractSummarizer-xEf8mœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
+        "selected": false,
+        "source": "Prompt-z865m",
+        "sourceHandle": "{œdataTypeœ: œPromptœ, œidœ: œPrompt-z865mœ, œnameœ: œpromptœ, œoutput_typesœ: [œMessageœ]}",
+        "target": "ContractSummarizer-xEf8m",
+        "targetHandle": "{œfieldNameœ: œrefinement_promptœ, œidœ: œContractSummarizer-xEf8mœ, œinputTypesœ: [œMessageœ], œtypeœ: œstrœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "AmazonBedrockModel",
+            "id": "AmazonBedrockModel-g8F7k",
+            "name": "model_output",
+            "output_types": [
+              "LanguageModel"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "llm",
+            "id": "ContractSummarizer-xEf8m",
+            "inputTypes": [
+              "LanguageModel"
+            ],
+            "type": "other"
+          }
+        },
+        "id": "reactflow__edge-AmazonBedrockModel-g8F7k{œdataTypeœ:œAmazonBedrockModelœ,œidœ:œAmazonBedrockModel-g8F7kœ,œnameœ:œmodel_outputœ,œoutput_typesœ:[œLanguageModelœ]}-ContractSummarizer-xEf8m{œfieldNameœ:œllmœ,œidœ:œContractSummarizer-xEf8mœ,œinputTypesœ:[œLanguageModelœ],œtypeœ:œotherœ}",
+        "selected": false,
+        "source": "AmazonBedrockModel-g8F7k",
+        "sourceHandle": "{œdataTypeœ: œAmazonBedrockModelœ, œidœ: œAmazonBedrockModel-g8F7kœ, œnameœ: œmodel_outputœ, œoutput_typesœ: [œLanguageModelœ]}",
+        "target": "ContractSummarizer-xEf8m",
+        "targetHandle": "{œfieldNameœ: œllmœ, œidœ: œContractSummarizer-xEf8mœ, œinputTypesœ: [œLanguageModelœ], œtypeœ: œotherœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "ContractSummarizer",
+            "id": "ContractSummarizer-xEf8m",
+            "name": "response",
+            "output_types": [
+              "Message"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "input_value",
+            "id": "ChatOutput-AXQCS",
+            "inputTypes": [
+              "Data",
+              "DataFrame",
+              "Message"
+            ],
+            "type": "other"
+          }
+        },
+        "id": "reactflow__edge-ContractSummarizer-xEf8m{œdataTypeœ:œContractSummarizerœ,œidœ:œContractSummarizer-xEf8mœ,œnameœ:œresponseœ,œoutput_typesœ:[œMessageœ]}-ChatOutput-AXQCS{œfieldNameœ:œinput_valueœ,œidœ:œChatOutput-AXQCSœ,œinputTypesœ:[œDataœ,œDataFrameœ,œMessageœ],œtypeœ:œotherœ}",
+        "selected": false,
+        "source": "ContractSummarizer-xEf8m",
+        "sourceHandle": "{œdataTypeœ: œContractSummarizerœ, œidœ: œContractSummarizer-xEf8mœ, œnameœ: œresponseœ, œoutput_typesœ: [œMessageœ]}",
+        "target": "ChatOutput-AXQCS",
+        "targetHandle": "{œfieldNameœ: œinput_valueœ, œidœ: œChatOutput-AXQCSœ, œinputTypesœ: [œDataœ, œDataFrameœ, œMessageœ], œtypeœ: œotherœ}"
+      }
+    ],
+    "nodes": [
+      {
+        "data": {
+          "id": "ChatInput-exl61",
+          "node": {
+            "base_classes": [
+              "Message"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "Get chat inputs from the Playground.",
+            "display_name": "Chat Input",
+            "documentation": "",
+            "edited": false,
+            "field_order": [
+              "input_value",
+              "should_store_message",
+              "sender",
+              "sender_name",
+              "session_id",
+              "files",
+              "background_color",
+              "chat_icon",
+              "text_color"
+            ],
+            "frozen": false,
+            "icon": "MessagesSquare",
+            "legacy": false,
+            "lf_version": "1.4.3",
+            "metadata": {},
+            "minimized": true,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Chat Message",
+                "group_outputs": false,
+                "method": "message_response",
+                "name": "message",
+                "selected": "Message",
+                "tool_mode": true,
+                "types": [
+                  "Message"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "background_color": {
+                "_input_type": "MessageTextInput",
+                "advanced": true,
+                "display_name": "Background Color",
+                "dynamic": false,
+                "info": "The background color of the icon.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "background_color",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              },
+              "chat_icon": {
+                "_input_type": "MessageTextInput",
+                "advanced": true,
+                "display_name": "Icon",
+                "dynamic": false,
+                "info": "The icon of the message.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "chat_icon",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              },
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "from langflow.base.data.utils import IMG_FILE_TYPES, TEXT_FILE_TYPES\nfrom langflow.base.io.chat import ChatComponent\nfrom langflow.inputs.inputs import BoolInput\nfrom langflow.io import (\n    DropdownInput,\n    FileInput,\n    MessageTextInput,\n    MultilineInput,\n    Output,\n)\nfrom langflow.schema.message import Message\nfrom langflow.utils.constants import (\n    MESSAGE_SENDER_AI,\n    MESSAGE_SENDER_NAME_USER,\n    MESSAGE_SENDER_USER,\n)\n\n\nclass ChatInput(ChatComponent):\n    display_name = \"Chat Input\"\n    description = \"Get chat inputs from the Playground.\"\n    icon = \"MessagesSquare\"\n    name = \"ChatInput\"\n    minimized = True\n\n    inputs = [\n        MultilineInput(\n            name=\"input_value\",\n            display_name=\"Input Text\",\n            value=\"\",\n            info=\"Message to be passed as input.\",\n            input_types=[],\n        ),\n        BoolInput(\n            name=\"should_store_message\",\n            display_name=\"Store Messages\",\n            info=\"Store the message in the history.\",\n            value=True,\n            advanced=True,\n        ),\n        DropdownInput(\n            name=\"sender\",\n            display_name=\"Sender Type\",\n            options=[MESSAGE_SENDER_AI, MESSAGE_SENDER_USER],\n            value=MESSAGE_SENDER_USER,\n            info=\"Type of sender.\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"sender_name\",\n            display_name=\"Sender Name\",\n            info=\"Name of the sender.\",\n            value=MESSAGE_SENDER_NAME_USER,\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"session_id\",\n            display_name=\"Session ID\",\n            info=\"The session ID of the chat. If empty, the current session ID parameter will be used.\",\n            advanced=True,\n        ),\n        FileInput(\n            name=\"files\",\n            display_name=\"Files\",\n            file_types=TEXT_FILE_TYPES + IMG_FILE_TYPES,\n            info=\"Files to be sent with the message.\",\n            advanced=True,\n            is_list=True,\n            temp_file=True,\n        ),\n        MessageTextInput(\n            name=\"background_color\",\n            display_name=\"Background Color\",\n            info=\"The background color of the icon.\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"chat_icon\",\n            display_name=\"Icon\",\n            info=\"The icon of the message.\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"text_color\",\n            display_name=\"Text Color\",\n            info=\"The text color of the name\",\n            advanced=True,\n        ),\n    ]\n    outputs = [\n        Output(display_name=\"Chat Message\", name=\"message\", method=\"message_response\"),\n    ]\n\n    async def message_response(self) -> Message:\n        background_color = self.background_color\n        text_color = self.text_color\n        icon = self.chat_icon\n\n        message = await Message.create(\n            text=self.input_value,\n            sender=self.sender,\n            sender_name=self.sender_name,\n            session_id=self.session_id,\n            files=self.files,\n            properties={\n                \"background_color\": background_color,\n                \"text_color\": text_color,\n                \"icon\": icon,\n            },\n        )\n        if self.session_id and isinstance(message, Message) and self.should_store_message:\n            stored_message = await self.send_message(\n                message,\n            )\n            self.message.value = stored_message\n            message = stored_message\n\n        self.status = message\n        return message\n"
+              },
+              "files": {
+                "_input_type": "FileInput",
+                "advanced": true,
+                "display_name": "Files",
+                "dynamic": false,
+                "fileTypes": [
+                  "txt",
+                  "md",
+                  "mdx",
+                  "csv",
+                  "json",
+                  "yaml",
+                  "yml",
+                  "xml",
+                  "html",
+                  "htm",
+                  "pdf",
+                  "docx",
+                  "py",
+                  "sh",
+                  "sql",
+                  "js",
+                  "ts",
+                  "tsx",
+                  "jpg",
+                  "jpeg",
+                  "png",
+                  "bmp",
+                  "image"
+                ],
+                "file_path": "",
+                "info": "Files to be sent with the message.",
+                "list": true,
+                "list_add_label": "Add More",
+                "name": "files",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "temp_file": true,
+                "title_case": false,
+                "trace_as_metadata": true,
+                "type": "file",
+                "value": ""
+              },
+              "input_value": {
+                "_input_type": "MultilineInput",
+                "advanced": false,
+                "copy_field": false,
+                "display_name": "Input Text",
+                "dynamic": false,
+                "info": "Message to be passed as input.",
+                "input_types": [],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "multiline": true,
+                "name": "input_value",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "  {\"pdf\" : \"/home/choonkeat/PycharmProjects/docker_example/documents/1.pdf\", \"title\" : \"CO-BRANDING AGREEMENT\", \"template\" : \"/app/templates/Contract Summary Template Zone (v1)(HW) (3).docx\", \"output_file_name\" : \"contract_summary\",  \"outputfolder\" : \"/app/templates\"}"
+              },
+              "sender": {
+                "_input_type": "DropdownInput",
+                "advanced": true,
+                "combobox": false,
+                "dialog_inputs": {},
+                "display_name": "Sender Type",
+                "dynamic": false,
+                "info": "Type of sender.",
+                "name": "sender",
+                "options": [
+                  "Machine",
+                  "User"
+                ],
+                "options_metadata": [],
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "toggle": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "User"
+              },
+              "sender_name": {
+                "_input_type": "MessageTextInput",
+                "advanced": true,
+                "display_name": "Sender Name",
+                "dynamic": false,
+                "info": "Name of the sender.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "sender_name",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "User"
+              },
+              "session_id": {
+                "_input_type": "MessageTextInput",
+                "advanced": true,
+                "display_name": "Session ID",
+                "dynamic": false,
+                "info": "The session ID of the chat. If empty, the current session ID parameter will be used.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "session_id",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              },
+              "should_store_message": {
+                "_input_type": "BoolInput",
+                "advanced": true,
+                "display_name": "Store Messages",
+                "dynamic": false,
+                "info": "Store the message in the history.",
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "should_store_message",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "bool",
+                "value": true
+              },
+              "text_color": {
+                "_input_type": "MessageTextInput",
+                "advanced": true,
+                "display_name": "Text Color",
+                "dynamic": false,
+                "info": "The text color of the name",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "text_color",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              }
+            },
+            "tool_mode": false
+          },
+          "showNode": true,
+          "type": "ChatInput"
+        },
+        "id": "ChatInput-exl61",
+        "measured": {
+          "height": 204,
+          "width": 320
+        },
+        "position": {
+          "x": -280.7322702741649,
+          "y": 554.8381166509562
+        },
+        "selected": false,
+        "type": "genericNode"
+      },
+      {
+        "data": {
+          "id": "DocumentFileComponent-l0T0E",
+          "node": {
+            "base_classes": [
+              "Data"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "Loads and processes document files in various formats.",
+            "display_name": "Document File",
+            "documentation": "",
+            "edited": true,
+            "field_order": [
+              "input_value",
+              "silent_errors"
+            ],
+            "frozen": false,
+            "icon": "file-text",
+            "legacy": false,
+            "metadata": {},
+            "minimized": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Data",
+                "group_outputs": false,
+                "hidden": null,
+                "method": "load_file",
+                "name": "data",
+                "options": null,
+                "required_inputs": null,
+                "selected": "Data",
+                "tool_mode": true,
+                "types": [
+                  "Data"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "import json\nimport os\nfrom io import StringIO\n\nimport PyPDF2\nimport docx2txt\nimport pandas as pd\nfrom langflow.base.data.utils import parse_text_file_to_data\nfrom langflow.custom import Component\nfrom langflow.inputs import MessageTextInput\nfrom langflow.io import BoolInput, Output\nfrom langflow.schema import Data\n\n\nclass DocumentFileComponent(Component):\n    display_name = \"Document File\"\n    description = \"Loads and processes document files in various formats.\"\n    icon = \"file-text\"\n\n    # Input/Output configuration\n    inputs = [\n        MessageTextInput(\n            name=\"input_value\",\n            display_name=\"Text\",\n            info=\"Text to be passed as input.\",\n            advanced=False\n        ),\n        BoolInput(\n            name=\"silent_errors\",\n            display_name=\"Silent Errors\",\n            advanced=True,\n            info=\"If true, errors will not raise an exception.\",\n        ),\n    ]\n    outputs = [\n        Output(display_name=\"Data\", name=\"data\", method=\"load_file\"),\n    ]\n\n    def read_file(self, path: str):\n        # Get the file extension\n        ext = os.path.splitext(path)[1].lower()\n\n        if ext == '.docx':\n            docs = docx2txt.process(path)\n            return docs\n\n        elif ext == '.json':\n            with open(path, 'r') as file:\n                data = json.load(file)\n            return data\n\n        elif ext == '.csv':\n            data = parse_text_file_to_data(path, silent_errors=self.silent_errors)\n            csv_file_like = StringIO(data.data.get('text'))\n            self.status = data if data else \"No value\"\n            df = pd.read_csv(csv_file_like)\n            return df\n\n        elif ext == '.pdf':\n            with open(path, 'rb') as pdf_file:\n                pdf_reader = PyPDF2.PdfReader(pdf_file)\n                text = ''\n                for page in pdf_reader.pages:\n                    text += page.extract_text()\n            return text\n\n        else:\n            raise ValueError(f\"Unsupported file extension: {ext}\")\n\n    def load_file(self) -> Data:\n        if not self.input_value:\n            raise ValueError(\"Please, pass a file path to use this component.\")\n        data = self.read_file(self.input_value)\n\n        return Data(data={\"text\": json.dumps(data)})\n"
+              },
+              "input_value": {
+                "_input_type": "MessageTextInput",
+                "advanced": false,
+                "display_name": "Text",
+                "dynamic": false,
+                "info": "Text to be passed as input.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "input_value",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              },
+              "silent_errors": {
+                "_input_type": "BoolInput",
+                "advanced": true,
+                "display_name": "Silent Errors",
+                "dynamic": false,
+                "info": "If true, errors will not raise an exception.",
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "silent_errors",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "bool",
+                "value": false
+              }
+            },
+            "tool_mode": false
+          },
+          "showNode": true,
+          "type": "DocumentFileComponent"
+        },
+        "dragging": false,
+        "id": "DocumentFileComponent-l0T0E",
+        "measured": {
+          "height": 220,
+          "width": 320
+        },
+        "position": {
+          "x": 754.0354450801393,
+          "y": 480.76605185237605
+        },
+        "selected": true,
+        "type": "genericNode"
+      },
+      {
+        "data": {
+          "id": "AmazonBedrockModel-g8F7k",
+          "node": {
+            "base_classes": [
+              "LanguageModel",
+              "Message"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "Generate text using Amazon Bedrock LLMs.",
+            "display_name": "Amazon Bedrock",
+            "documentation": "",
+            "edited": false,
+            "field_order": [
+              "input_value",
+              "system_message",
+              "stream",
+              "model_id",
+              "aws_access_key_id",
+              "aws_secret_access_key",
+              "aws_session_token",
+              "credentials_profile_name",
+              "region_name",
+              "model_kwargs",
+              "endpoint_url"
+            ],
+            "frozen": false,
+            "icon": "Amazon",
+            "legacy": false,
+            "lf_version": "1.4.3",
+            "metadata": {
+              "keywords": [
+                "model",
+                "llm",
+                "language model",
+                "large language model"
+              ]
+            },
+            "minimized": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Model Response",
+                "group_outputs": false,
+                "method": "text_response",
+                "name": "text_output",
+                "selected": null,
+                "tool_mode": true,
+                "types": [
+                  "Message"
+                ],
+                "value": "__UNDEFINED__"
+              },
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Language Model",
+                "group_outputs": false,
+                "method": "build_model",
+                "name": "model_output",
+                "selected": "LanguageModel",
+                "tool_mode": true,
+                "types": [
+                  "LanguageModel"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "aws_access_key_id": {
+                "_input_type": "SecretStrInput",
+                "advanced": false,
+                "display_name": "AWS Access Key ID",
+                "dynamic": false,
+                "info": "The access key for your AWS account.Usually set in Python code as the environment variable 'AWS_ACCESS_KEY_ID'.",
+                "input_types": [],
+                "load_from_db": false,
+                "name": "aws_access_key_id",
+                "password": true,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "str",
+                "value": ""
+              },
+              "aws_secret_access_key": {
+                "_input_type": "SecretStrInput",
+                "advanced": false,
+                "display_name": "AWS Secret Access Key",
+                "dynamic": false,
+                "info": "The secret key for your AWS account. Usually set in Python code as the environment variable 'AWS_SECRET_ACCESS_KEY'.",
+                "input_types": [],
+                "load_from_db": false,
+                "name": "aws_secret_access_key",
+                "password": true,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "str",
+                "value": ""
+              },
+              "aws_session_token": {
+                "_input_type": "SecretStrInput",
+                "advanced": false,
+                "display_name": "AWS Session Token",
+                "dynamic": false,
+                "info": "The session key for your AWS account. Only needed for temporary credentials. Usually set in Python code as the environment variable 'AWS_SESSION_TOKEN'.",
+                "input_types": [],
+                "load_from_db": false,
+                "name": "aws_session_token",
+                "password": true,
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "type": "str",
+                "value": ""
+              },
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "from langflow.base.models.aws_constants import AWS_REGIONS, AWS_MODEL_IDs\nfrom langflow.base.models.model import LCModelComponent\nfrom langflow.field_typing import LanguageModel\nfrom langflow.inputs.inputs import MessageTextInput, SecretStrInput\nfrom langflow.io import DictInput, DropdownInput\n\n\nclass AmazonBedrockComponent(LCModelComponent):\n    display_name: str = \"Amazon Bedrock\"\n    description: str = \"Generate text using Amazon Bedrock LLMs.\"\n    icon = \"Amazon\"\n    name = \"AmazonBedrockModel\"\n\n    inputs = [\n        *LCModelComponent._base_inputs,\n        DropdownInput(\n            name=\"model_id\",\n            display_name=\"Model ID\",\n            options=AWS_MODEL_IDs,\n            value=\"anthropic.claude-3-haiku-20240307-v1:0\",\n            info=\"List of available model IDs to choose from.\",\n        ),\n        SecretStrInput(\n            name=\"aws_access_key_id\",\n            display_name=\"AWS Access Key ID\",\n            info=\"The access key for your AWS account.\"\n            \"Usually set in Python code as the environment variable 'AWS_ACCESS_KEY_ID'.\",\n            value=\"AWS_ACCESS_KEY_ID\",\n            required=True,\n        ),\n        SecretStrInput(\n            name=\"aws_secret_access_key\",\n            display_name=\"AWS Secret Access Key\",\n            info=\"The secret key for your AWS account. \"\n            \"Usually set in Python code as the environment variable 'AWS_SECRET_ACCESS_KEY'.\",\n            value=\"AWS_SECRET_ACCESS_KEY\",\n            required=True,\n        ),\n        SecretStrInput(\n            name=\"aws_session_token\",\n            display_name=\"AWS Session Token\",\n            advanced=False,\n            info=\"The session key for your AWS account. \"\n            \"Only needed for temporary credentials. \"\n            \"Usually set in Python code as the environment variable 'AWS_SESSION_TOKEN'.\",\n            load_from_db=False,\n        ),\n        SecretStrInput(\n            name=\"credentials_profile_name\",\n            display_name=\"Credentials Profile Name\",\n            advanced=True,\n            info=\"The name of the profile to use from your \"\n            \"~/.aws/credentials file. \"\n            \"If not provided, the default profile will be used.\",\n            load_from_db=False,\n        ),\n        DropdownInput(\n            name=\"region_name\",\n            display_name=\"Region Name\",\n            value=\"us-east-1\",\n            options=AWS_REGIONS,\n            info=\"The AWS region where your Bedrock resources are located.\",\n        ),\n        DictInput(\n            name=\"model_kwargs\",\n            display_name=\"Model Kwargs\",\n            advanced=True,\n            is_list=True,\n            info=\"Additional keyword arguments to pass to the model.\",\n        ),\n        MessageTextInput(\n            name=\"endpoint_url\",\n            display_name=\"Endpoint URL\",\n            advanced=True,\n            info=\"The URL of the Bedrock endpoint to use.\",\n        ),\n    ]\n\n    def build_model(self) -> LanguageModel:  # type: ignore[type-var]\n        try:\n            from langchain_aws import ChatBedrock\n        except ImportError as e:\n            msg = \"langchain_aws is not installed. Please install it with `pip install langchain_aws`.\"\n            raise ImportError(msg) from e\n        try:\n            import boto3\n        except ImportError as e:\n            msg = \"boto3 is not installed. Please install it with `pip install boto3`.\"\n            raise ImportError(msg) from e\n        if self.aws_access_key_id or self.aws_secret_access_key:\n            try:\n                session = boto3.Session(\n                    aws_access_key_id=self.aws_access_key_id,\n                    aws_secret_access_key=self.aws_secret_access_key,\n                    aws_session_token=self.aws_session_token,\n                )\n            except Exception as e:\n                msg = \"Could not create a boto3 session.\"\n                raise ValueError(msg) from e\n        elif self.credentials_profile_name:\n            session = boto3.Session(profile_name=self.credentials_profile_name)\n        else:\n            session = boto3.Session()\n\n        client_params = {}\n        if self.endpoint_url:\n            client_params[\"endpoint_url\"] = self.endpoint_url\n        if self.region_name:\n            client_params[\"region_name\"] = self.region_name\n\n        boto3_client = session.client(\"bedrock-runtime\", **client_params)\n        try:\n            output = ChatBedrock(\n                client=boto3_client,\n                model_id=self.model_id,\n                region_name=self.region_name,\n                model_kwargs=self.model_kwargs,\n                endpoint_url=self.endpoint_url,\n                streaming=self.stream,\n            )\n        except Exception as e:\n            msg = \"Could not connect to AmazonBedrock API.\"\n            raise ValueError(msg) from e\n        return output\n"
+              },
+              "credentials_profile_name": {
+                "_input_type": "SecretStrInput",
+                "advanced": true,
+                "display_name": "Credentials Profile Name",
+                "dynamic": false,
+                "info": "The name of the profile to use from your ~/.aws/credentials file. If not provided, the default profile will be used.",
+                "input_types": [],
+                "load_from_db": false,
+                "name": "credentials_profile_name",
+                "password": true,
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "type": "str",
+                "value": ""
+              },
+              "endpoint_url": {
+                "_input_type": "MessageTextInput",
+                "advanced": true,
+                "display_name": "Endpoint URL",
+                "dynamic": false,
+                "info": "The URL of the Bedrock endpoint to use.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "endpoint_url",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              },
+              "input_value": {
+                "_input_type": "MessageInput",
+                "advanced": false,
+                "display_name": "Input",
+                "dynamic": false,
+                "info": "",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "input_value",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              },
+              "model_id": {
+                "_input_type": "DropdownInput",
+                "advanced": false,
+                "combobox": false,
+                "dialog_inputs": {},
+                "display_name": "Model ID",
+                "dynamic": false,
+                "info": "List of available model IDs to choose from.",
+                "load_from_db": false,
+                "name": "model_id",
+                "options": [
+                  "amazon.titan-text-express-v1",
+                  "amazon.titan-text-lite-v1",
+                  "amazon.titan-text-premier-v1:0",
+                  "anthropic.claude-v2",
+                  "anthropic.claude-v2:1",
+                  "anthropic.claude-3-sonnet-20240229-v1:0",
+                  "anthropic.claude-3-5-sonnet-20240620-v1:0",
+                  "anthropic.claude-3-5-sonnet-20241022-v2:0",
+                  "anthropic.claude-3-haiku-20240307-v1:0",
+                  "anthropic.claude-3-5-haiku-20241022-v1:0",
+                  "anthropic.claude-3-opus-20240229-v1:0",
+                  "anthropic.claude-instant-v1",
+                  "ai21.jamba-instruct-v1:0",
+                  "ai21.j2-mid-v1",
+                  "ai21.j2-ultra-v1",
+                  "ai21.jamba-1-5-large-v1:0",
+                  "ai21.jamba-1-5-mini-v1:0",
+                  "cohere.command-text-v14",
+                  "cohere.command-light-text-v14",
+                  "cohere.command-r-v1:0",
+                  "cohere.command-r-plus-v1:0",
+                  "meta.llama2-13b-chat-v1",
+                  "meta.llama2-70b-chat-v1",
+                  "meta.llama3-8b-instruct-v1:0",
+                  "meta.llama3-70b-instruct-v1:0",
+                  "meta.llama3-1-8b-instruct-v1:0",
+                  "meta.llama3-1-70b-instruct-v1:0",
+                  "meta.llama3-1-405b-instruct-v1:0",
+                  "meta.llama3-2-1b-instruct-v1:0",
+                  "meta.llama3-2-3b-instruct-v1:0",
+                  "meta.llama3-2-11b-instruct-v1:0",
+                  "meta.llama3-2-90b-instruct-v1:0",
+                  "mistral.mistral-7b-instruct-v0:2",
+                  "mistral.mixtral-8x7b-instruct-v0:1",
+                  "mistral.mistral-large-2402-v1:0",
+                  "mistral.mistral-large-2407-v1:0",
+                  "mistral.mistral-small-2402-v1:0"
+                ],
+                "options_metadata": [],
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "toggle": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "meta.llama3-70b-instruct-v1:0"
+              },
+              "model_kwargs": {
+                "_input_type": "DictInput",
+                "advanced": true,
+                "display_name": "Model Kwargs",
+                "dynamic": false,
+                "info": "Additional keyword arguments to pass to the model.",
+                "list": true,
+                "list_add_label": "Add More",
+                "name": "model_kwargs",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "type": "dict",
+                "value": {}
+              },
+              "region_name": {
+                "_input_type": "DropdownInput",
+                "advanced": false,
+                "combobox": false,
+                "dialog_inputs": {},
+                "display_name": "Region Name",
+                "dynamic": false,
+                "info": "The AWS region where your Bedrock resources are located.",
+                "load_from_db": false,
+                "name": "region_name",
+                "options": [
+                  "us-west-2",
+                  "us-west-1",
+                  "us-gov-west-1",
+                  "us-gov-east-1",
+                  "us-east-2",
+                  "us-east-1",
+                  "sa-east-1",
+                  "me-south-1",
+                  "me-central-1",
+                  "il-central-1",
+                  "eu-west-3",
+                  "eu-west-2",
+                  "eu-west-1",
+                  "eu-south-2",
+                  "eu-south-1",
+                  "eu-north-1",
+                  "eu-central-2",
+                  "eu-central-1",
+                  "cn-northwest-1",
+                  "cn-north-1",
+                  "ca-west-1",
+                  "ca-central-1",
+                  "ap-southeast-5",
+                  "ap-southeast-4",
+                  "ap-southeast-3",
+                  "ap-southeast-2",
+                  "ap-southeast-1",
+                  "ap-south-2",
+                  "ap-south-1",
+                  "ap-northeast-3",
+                  "ap-northeast-2",
+                  "ap-northeast-1",
+                  "ap-east-1",
+                  "af-south-1"
+                ],
+                "options_metadata": [],
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "toggle": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "us-west-2"
+              },
+              "stream": {
+                "_input_type": "BoolInput",
+                "advanced": true,
+                "display_name": "Stream",
+                "dynamic": false,
+                "info": "Stream the response from the model. Streaming works only in Chat.",
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "stream",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "bool",
+                "value": false
+              },
+              "system_message": {
+                "_input_type": "MultilineInput",
+                "advanced": false,
+                "copy_field": false,
+                "display_name": "System Message",
+                "dynamic": false,
+                "info": "System message to pass to the model.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "multiline": true,
+                "name": "system_message",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              }
+            },
+            "tool_mode": false
+          },
+          "showNode": true,
+          "type": "AmazonBedrockModel"
+        },
+        "dragging": false,
+        "id": "AmazonBedrockModel-g8F7k",
+        "measured": {
+          "height": 699,
+          "width": 320
+        },
+        "position": {
+          "x": 1228.8807255320212,
+          "y": 2109.769850034783
+        },
+        "selected": false,
+        "type": "genericNode"
+      },
+      {
+        "data": {
+          "id": "Prompt-A6bEI",
+          "node": {
+            "base_classes": [
+              "Message"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {
+              "template": [
+                "title",
+                "text"
+              ]
+            },
+            "description": "Create a prompt template with dynamic variables.",
+            "display_name": "Prompt",
+            "documentation": "",
+            "edited": false,
+            "field_order": [
+              "template",
+              "tool_placeholder"
+            ],
+            "frozen": false,
+            "icon": "braces",
+            "legacy": false,
+            "lf_version": "1.4.3",
+            "metadata": {},
+            "minimized": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Prompt",
+                "group_outputs": false,
+                "method": "build_prompt",
+                "name": "prompt",
+                "selected": "Message",
+                "tool_mode": true,
+                "types": [
+                  "Message"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "from langflow.base.prompts.api_utils import process_prompt_template\nfrom langflow.custom.custom_component.component import Component\nfrom langflow.inputs.inputs import DefaultPromptField\nfrom langflow.io import MessageTextInput, Output, PromptInput\nfrom langflow.schema.message import Message\nfrom langflow.template.utils import update_template_values\n\n\nclass PromptComponent(Component):\n    display_name: str = \"Prompt\"\n    description: str = \"Create a prompt template with dynamic variables.\"\n    icon = \"braces\"\n    trace_type = \"prompt\"\n    name = \"Prompt\"\n\n    inputs = [\n        PromptInput(name=\"template\", display_name=\"Template\"),\n        MessageTextInput(\n            name=\"tool_placeholder\",\n            display_name=\"Tool Placeholder\",\n            tool_mode=True,\n            advanced=True,\n            info=\"A placeholder input for tool mode.\",\n        ),\n    ]\n\n    outputs = [\n        Output(display_name=\"Prompt\", name=\"prompt\", method=\"build_prompt\"),\n    ]\n\n    async def build_prompt(self) -> Message:\n        prompt = Message.from_template(**self._attributes)\n        self.status = prompt.text\n        return prompt\n\n    def _update_template(self, frontend_node: dict):\n        prompt_template = frontend_node[\"template\"][\"template\"][\"value\"]\n        custom_fields = frontend_node[\"custom_fields\"]\n        frontend_node_template = frontend_node[\"template\"]\n        _ = process_prompt_template(\n            template=prompt_template,\n            name=\"template\",\n            custom_fields=custom_fields,\n            frontend_node_template=frontend_node_template,\n        )\n        return frontend_node\n\n    async def update_frontend_node(self, new_frontend_node: dict, current_frontend_node: dict):\n        \"\"\"This function is called after the code validation is done.\"\"\"\n        frontend_node = await super().update_frontend_node(new_frontend_node, current_frontend_node)\n        template = frontend_node[\"template\"][\"template\"][\"value\"]\n        # Kept it duplicated for backwards compatibility\n        _ = process_prompt_template(\n            template=template,\n            name=\"template\",\n            custom_fields=frontend_node[\"custom_fields\"],\n            frontend_node_template=frontend_node[\"template\"],\n        )\n        # Now that template is updated, we need to grab any values that were set in the current_frontend_node\n        # and update the frontend_node with those values\n        update_template_values(new_template=frontend_node, previous_template=current_frontend_node[\"template\"])\n        return frontend_node\n\n    def _get_fallback_input(self, **kwargs):\n        return DefaultPromptField(**kwargs)\n"
+              },
+              "template": {
+                "_input_type": "PromptInput",
+                "advanced": false,
+                "display_name": "Template",
+                "dynamic": false,
+                "info": "",
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "template",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "type": "prompt",
+                "value": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\nGiven the contract document and its title: {title},\n\nAnalyze the contract document and extract the following information:\n1. Contract Type: The type of contract the contract document is about\n2. Contract Signed Date: The date the contract is signed\n3. Vendor: The individual, company, or business providing the product, rental, or service to the client in the contract\n4. Vendor Short Name: The vendor's abbreviation or alternate names if it is stated, else put the vendor's name\n5. Vendor Address: The address or mailing address of the vendor\n6. Client: The individual, company, or business receiving the product, rental, or service from the vendor in the contract\n7. Client Short Name: The client's abbreviation or alternate names if it is stated, else put the vendor's name\n8. Client Address: The address or mailing address of the client\n9. If the information is not available in the contract document, put \"NIL\" for that field\n\nYour response MUST be in the following JSON format:\n```json\n{{\"contract_type\" : \"The type of contract\", \"contract_signed_date\" : \"The date the contract is signed\", \"vendor_name\" : \"Name of vendor\", \"vendor_short_name\" : \"Abbreviation or alternate names of vendor\", \"vendor_address\" : \"Address of vendor\", \"client_name\" : \"Name of client\", \"client_short_name\" : \"Abbreviation or alternate names of client\", \"client_address\" : \"Address of client\"}}\n```\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n------------\n{text}\n------------\n<|eot_id|><|start_header_id|>assistant<|end_header_id|>"
+              },
+              "text": {
+                "advanced": false,
+                "display_name": "text",
+                "dynamic": false,
+                "field_type": "str",
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "text",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "type": "str",
+                "value": ""
+              },
+              "title": {
+                "advanced": false,
+                "display_name": "title",
+                "dynamic": false,
+                "field_type": "str",
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "title",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "type": "str",
+                "value": ""
+              },
+              "tool_placeholder": {
+                "_input_type": "MessageTextInput",
+                "advanced": true,
+                "display_name": "Tool Placeholder",
+                "dynamic": false,
+                "info": "A placeholder input for tool mode.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "tool_placeholder",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": true,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              }
+            },
+            "tool_mode": false
+          },
+          "showNode": true,
+          "type": "Prompt"
+        },
+        "dragging": false,
+        "id": "Prompt-A6bEI",
+        "measured": {
+          "height": 449,
+          "width": 320
+        },
+        "position": {
+          "x": 1225.1509182613072,
+          "y": 997.1654433882222
+        },
+        "selected": false,
+        "type": "genericNode"
+      },
+      {
+        "data": {
+          "id": "Prompt-z865m",
+          "node": {
+            "base_classes": [
+              "Message"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {
+              "template": [
+                "title",
+                "text"
+              ]
+            },
+            "description": "Create a prompt template with dynamic variables.",
+            "display_name": "Prompt",
+            "documentation": "",
+            "edited": false,
+            "field_order": [
+              "template",
+              "tool_placeholder"
+            ],
+            "frozen": false,
+            "icon": "braces",
+            "legacy": false,
+            "lf_version": "1.4.3",
+            "metadata": {},
+            "minimized": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Prompt",
+                "group_outputs": false,
+                "method": "build_prompt",
+                "name": "prompt",
+                "selected": "Message",
+                "tool_mode": true,
+                "types": [
+                  "Message"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "from langflow.base.prompts.api_utils import process_prompt_template\nfrom langflow.custom.custom_component.component import Component\nfrom langflow.inputs.inputs import DefaultPromptField\nfrom langflow.io import MessageTextInput, Output, PromptInput\nfrom langflow.schema.message import Message\nfrom langflow.template.utils import update_template_values\n\n\nclass PromptComponent(Component):\n    display_name: str = \"Prompt\"\n    description: str = \"Create a prompt template with dynamic variables.\"\n    icon = \"braces\"\n    trace_type = \"prompt\"\n    name = \"Prompt\"\n\n    inputs = [\n        PromptInput(name=\"template\", display_name=\"Template\"),\n        MessageTextInput(\n            name=\"tool_placeholder\",\n            display_name=\"Tool Placeholder\",\n            tool_mode=True,\n            advanced=True,\n            info=\"A placeholder input for tool mode.\",\n        ),\n    ]\n\n    outputs = [\n        Output(display_name=\"Prompt\", name=\"prompt\", method=\"build_prompt\"),\n    ]\n\n    async def build_prompt(self) -> Message:\n        prompt = Message.from_template(**self._attributes)\n        self.status = prompt.text\n        return prompt\n\n    def _update_template(self, frontend_node: dict):\n        prompt_template = frontend_node[\"template\"][\"template\"][\"value\"]\n        custom_fields = frontend_node[\"custom_fields\"]\n        frontend_node_template = frontend_node[\"template\"]\n        _ = process_prompt_template(\n            template=prompt_template,\n            name=\"template\",\n            custom_fields=custom_fields,\n            frontend_node_template=frontend_node_template,\n        )\n        return frontend_node\n\n    async def update_frontend_node(self, new_frontend_node: dict, current_frontend_node: dict):\n        \"\"\"This function is called after the code validation is done.\"\"\"\n        frontend_node = await super().update_frontend_node(new_frontend_node, current_frontend_node)\n        template = frontend_node[\"template\"][\"template\"][\"value\"]\n        # Kept it duplicated for backwards compatibility\n        _ = process_prompt_template(\n            template=template,\n            name=\"template\",\n            custom_fields=frontend_node[\"custom_fields\"],\n            frontend_node_template=frontend_node[\"template\"],\n        )\n        # Now that template is updated, we need to grab any values that were set in the current_frontend_node\n        # and update the frontend_node with those values\n        update_template_values(new_template=frontend_node, previous_template=current_frontend_node[\"template\"])\n        return frontend_node\n\n    def _get_fallback_input(self, **kwargs):\n        return DefaultPromptField(**kwargs)\n"
+              },
+              "template": {
+                "_input_type": "PromptInput",
+                "advanced": false,
+                "display_name": "Template",
+                "dynamic": false,
+                "info": "",
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "template",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "type": "prompt",
+                "value": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\nYou have been provided with a list of extracted information from a contract titled \"{title}\".\n\nExtracted Information:\n\"{text}\"\n\nThe original task was to analyze the contract document, which was broken down into chunks, and extract the following information:\n1. Contract Type: The type of contract the contract document is about\n2. Contract Signed Date: The date the contract is signed\n3. Vendor: The individual, company, or business providing the product, rental, or service to the client in the contract\n4. Vendor Short Name: The vendor's abbreviation or alternate names if it is stated, else put the vendor's name\n5. Vendor Address: The address or mailing address of the vendor\n6. Client: The individual, company, or business receiving the product, rental, or service from the vendor in the contract\n7. Client Short Name: The client's abbreviation or alternate names if it is stated, else put the vendor's name\n8. Client Address: The address or mailing address of the client\n9. If the information is not available in the contract document, put \"NIL\" for that field\n\nYour task now is to consolidate all these information that was previously extracted and determine all of which that are relevant to give a refined output.\nInclude only the most relevant vendor if there are multiple vendors mentioned.\nInclude only the most relevant client if there are multiple clients mentioned.\n\nDO NOT output any explanation. Your final output MUST strictly follow the JSON format below, and only one set of information should be included:\n```json\n{{\"contract_type\" : \"The type of contract\", \"contract_signed_date\" : \"The date the contract is signed\", \"vendor_name\" : \"Name of vendor\", \"vendor_short_name\" : \"Abbreviation or alternate names of vendor\", \"vendor_address\" : \"Address of vendor\", \"client_name\" : \"Name of client\", \"client_short_name\" : \"Abbreviation or alternate names of client\", \"client_address\" : \"Address of client\"}}\n```\n\n<|eot_id|><|start_header_id|>assistant<|end_header_id|>"
+              },
+              "text": {
+                "advanced": false,
+                "display_name": "text",
+                "dynamic": false,
+                "field_type": "str",
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "text",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "type": "str",
+                "value": ""
+              },
+              "title": {
+                "advanced": false,
+                "display_name": "title",
+                "dynamic": false,
+                "field_type": "str",
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "title",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "type": "str",
+                "value": ""
+              },
+              "tool_placeholder": {
+                "_input_type": "MessageTextInput",
+                "advanced": true,
+                "display_name": "Tool Placeholder",
+                "dynamic": false,
+                "info": "A placeholder input for tool mode.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "tool_placeholder",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": true,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              }
+            },
+            "tool_mode": false
+          },
+          "showNode": true,
+          "type": "Prompt"
+        },
+        "dragging": false,
+        "id": "Prompt-z865m",
+        "measured": {
+          "height": 449,
+          "width": 320
+        },
+        "position": {
+          "x": 1230.0908032637801,
+          "y": 1541.6636229240046
+        },
+        "selected": false,
+        "type": "genericNode"
+      },
+      {
+        "data": {
+          "id": "ChatOutput-AXQCS",
+          "node": {
+            "base_classes": [
+              "Message"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "Display a chat message in the Playground.",
+            "display_name": "Chat Output",
+            "documentation": "",
+            "edited": false,
+            "field_order": [
+              "input_value",
+              "should_store_message",
+              "sender",
+              "sender_name",
+              "session_id",
+              "data_template",
+              "background_color",
+              "chat_icon",
+              "text_color",
+              "clean_data"
+            ],
+            "frozen": false,
+            "icon": "MessagesSquare",
+            "legacy": false,
+            "lf_version": "1.4.3",
+            "metadata": {},
+            "minimized": true,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Output Message",
+                "group_outputs": false,
+                "method": "message_response",
+                "name": "message",
+                "selected": "Message",
+                "tool_mode": true,
+                "types": [
+                  "Message"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "background_color": {
+                "_input_type": "MessageTextInput",
+                "advanced": true,
+                "display_name": "Background Color",
+                "dynamic": false,
+                "info": "The background color of the icon.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "background_color",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              },
+              "chat_icon": {
+                "_input_type": "MessageTextInput",
+                "advanced": true,
+                "display_name": "Icon",
+                "dynamic": false,
+                "info": "The icon of the message.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "chat_icon",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              },
+              "clean_data": {
+                "_input_type": "BoolInput",
+                "advanced": true,
+                "display_name": "Basic Clean Data",
+                "dynamic": false,
+                "info": "Whether to clean the data",
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "clean_data",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "bool",
+                "value": true
+              },
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "from collections.abc import Generator\nfrom typing import Any\n\nimport orjson\nfrom fastapi.encoders import jsonable_encoder\n\nfrom langflow.base.io.chat import ChatComponent\nfrom langflow.helpers.data import safe_convert\nfrom langflow.inputs.inputs import BoolInput, DropdownInput, HandleInput, MessageTextInput\nfrom langflow.schema.data import Data\nfrom langflow.schema.dataframe import DataFrame\nfrom langflow.schema.message import Message\nfrom langflow.schema.properties import Source\nfrom langflow.template.field.base import Output\nfrom langflow.utils.constants import (\n    MESSAGE_SENDER_AI,\n    MESSAGE_SENDER_NAME_AI,\n    MESSAGE_SENDER_USER,\n)\n\n\nclass ChatOutput(ChatComponent):\n    display_name = \"Chat Output\"\n    description = \"Display a chat message in the Playground.\"\n    icon = \"MessagesSquare\"\n    name = \"ChatOutput\"\n    minimized = True\n\n    inputs = [\n        HandleInput(\n            name=\"input_value\",\n            display_name=\"Inputs\",\n            info=\"Message to be passed as output.\",\n            input_types=[\"Data\", \"DataFrame\", \"Message\"],\n            required=True,\n        ),\n        BoolInput(\n            name=\"should_store_message\",\n            display_name=\"Store Messages\",\n            info=\"Store the message in the history.\",\n            value=True,\n            advanced=True,\n        ),\n        DropdownInput(\n            name=\"sender\",\n            display_name=\"Sender Type\",\n            options=[MESSAGE_SENDER_AI, MESSAGE_SENDER_USER],\n            value=MESSAGE_SENDER_AI,\n            advanced=True,\n            info=\"Type of sender.\",\n        ),\n        MessageTextInput(\n            name=\"sender_name\",\n            display_name=\"Sender Name\",\n            info=\"Name of the sender.\",\n            value=MESSAGE_SENDER_NAME_AI,\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"session_id\",\n            display_name=\"Session ID\",\n            info=\"The session ID of the chat. If empty, the current session ID parameter will be used.\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"data_template\",\n            display_name=\"Data Template\",\n            value=\"{text}\",\n            advanced=True,\n            info=\"Template to convert Data to Text. If left empty, it will be dynamically set to the Data's text key.\",\n        ),\n        MessageTextInput(\n            name=\"background_color\",\n            display_name=\"Background Color\",\n            info=\"The background color of the icon.\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"chat_icon\",\n            display_name=\"Icon\",\n            info=\"The icon of the message.\",\n            advanced=True,\n        ),\n        MessageTextInput(\n            name=\"text_color\",\n            display_name=\"Text Color\",\n            info=\"The text color of the name\",\n            advanced=True,\n        ),\n        BoolInput(\n            name=\"clean_data\",\n            display_name=\"Basic Clean Data\",\n            value=True,\n            info=\"Whether to clean the data\",\n            advanced=True,\n        ),\n    ]\n    outputs = [\n        Output(\n            display_name=\"Output Message\",\n            name=\"message\",\n            method=\"message_response\",\n        ),\n    ]\n\n    def _build_source(self, id_: str | None, display_name: str | None, source: str | None) -> Source:\n        source_dict = {}\n        if id_:\n            source_dict[\"id\"] = id_\n        if display_name:\n            source_dict[\"display_name\"] = display_name\n        if source:\n            # Handle case where source is a ChatOpenAI object\n            if hasattr(source, \"model_name\"):\n                source_dict[\"source\"] = source.model_name\n            elif hasattr(source, \"model\"):\n                source_dict[\"source\"] = str(source.model)\n            else:\n                source_dict[\"source\"] = str(source)\n        return Source(**source_dict)\n\n    async def message_response(self) -> Message:\n        # First convert the input to string if needed\n        text = self.convert_to_string()\n\n        # Get source properties\n        source, icon, display_name, source_id = self.get_properties_from_source_component()\n        background_color = self.background_color\n        text_color = self.text_color\n        if self.chat_icon:\n            icon = self.chat_icon\n\n        # Create or use existing Message object\n        if isinstance(self.input_value, Message):\n            message = self.input_value\n            # Update message properties\n            message.text = text\n        else:\n            message = Message(text=text)\n\n        # Set message properties\n        message.sender = self.sender\n        message.sender_name = self.sender_name\n        message.session_id = self.session_id\n        message.flow_id = self.graph.flow_id if hasattr(self, \"graph\") else None\n        message.properties.source = self._build_source(source_id, display_name, source)\n        message.properties.icon = icon\n        message.properties.background_color = background_color\n        message.properties.text_color = text_color\n\n        # Store message if needed\n        if self.session_id and self.should_store_message:\n            stored_message = await self.send_message(message)\n            self.message.value = stored_message\n            message = stored_message\n\n        self.status = message\n        return message\n\n    def _serialize_data(self, data: Data) -> str:\n        \"\"\"Serialize Data object to JSON string.\"\"\"\n        # Convert data.data to JSON-serializable format\n        serializable_data = jsonable_encoder(data.data)\n        # Serialize with orjson, enabling pretty printing with indentation\n        json_bytes = orjson.dumps(serializable_data, option=orjson.OPT_INDENT_2)\n        # Convert bytes to string and wrap in Markdown code blocks\n        return \"```json\\n\" + json_bytes.decode(\"utf-8\") + \"\\n```\"\n\n    def _validate_input(self) -> None:\n        \"\"\"Validate the input data and raise ValueError if invalid.\"\"\"\n        if self.input_value is None:\n            msg = \"Input data cannot be None\"\n            raise ValueError(msg)\n        if isinstance(self.input_value, list) and not all(\n            isinstance(item, Message | Data | DataFrame | str) for item in self.input_value\n        ):\n            invalid_types = [\n                type(item).__name__\n                for item in self.input_value\n                if not isinstance(item, Message | Data | DataFrame | str)\n            ]\n            msg = f\"Expected Data or DataFrame or Message or str, got {invalid_types}\"\n            raise TypeError(msg)\n        if not isinstance(\n            self.input_value,\n            Message | Data | DataFrame | str | list | Generator | type(None),\n        ):\n            type_name = type(self.input_value).__name__\n            msg = f\"Expected Data or DataFrame or Message or str, Generator or None, got {type_name}\"\n            raise TypeError(msg)\n\n    def convert_to_string(self) -> str | Generator[Any, None, None]:\n        \"\"\"Convert input data to string with proper error handling.\"\"\"\n        self._validate_input()\n        if isinstance(self.input_value, list):\n            return \"\\n\".join([safe_convert(item, clean_data=self.clean_data) for item in self.input_value])\n        if isinstance(self.input_value, Generator):\n            return self.input_value\n        return safe_convert(self.input_value)\n"
+              },
+              "data_template": {
+                "_input_type": "MessageTextInput",
+                "advanced": true,
+                "display_name": "Data Template",
+                "dynamic": false,
+                "info": "Template to convert Data to Text. If left empty, it will be dynamically set to the Data's text key.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "data_template",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "{text}"
+              },
+              "input_value": {
+                "_input_type": "HandleInput",
+                "advanced": false,
+                "display_name": "Inputs",
+                "dynamic": false,
+                "info": "Message to be passed as output.",
+                "input_types": [
+                  "Data",
+                  "DataFrame",
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "input_value",
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "trace_as_metadata": true,
+                "type": "other",
+                "value": ""
+              },
+              "sender": {
+                "_input_type": "DropdownInput",
+                "advanced": true,
+                "combobox": false,
+                "dialog_inputs": {},
+                "display_name": "Sender Type",
+                "dynamic": false,
+                "info": "Type of sender.",
+                "name": "sender",
+                "options": [
+                  "Machine",
+                  "User"
+                ],
+                "options_metadata": [],
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "toggle": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "Machine"
+              },
+              "sender_name": {
+                "_input_type": "MessageTextInput",
+                "advanced": true,
+                "display_name": "Sender Name",
+                "dynamic": false,
+                "info": "Name of the sender.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "sender_name",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "AI"
+              },
+              "session_id": {
+                "_input_type": "MessageTextInput",
+                "advanced": true,
+                "display_name": "Session ID",
+                "dynamic": false,
+                "info": "The session ID of the chat. If empty, the current session ID parameter will be used.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "session_id",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              },
+              "should_store_message": {
+                "_input_type": "BoolInput",
+                "advanced": true,
+                "display_name": "Store Messages",
+                "dynamic": false,
+                "info": "Store the message in the history.",
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "should_store_message",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "bool",
+                "value": true
+              },
+              "text_color": {
+                "_input_type": "MessageTextInput",
+                "advanced": true,
+                "display_name": "Text Color",
+                "dynamic": false,
+                "info": "The text color of the name",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "text_color",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              }
+            },
+            "tool_mode": false
+          },
+          "showNode": true,
+          "type": "ChatOutput"
+        },
+        "dragging": false,
+        "id": "ChatOutput-AXQCS",
+        "measured": {
+          "height": 166,
+          "width": 320
+        },
+        "position": {
+          "x": 2687.915996192174,
+          "y": 1582.010197601791
+        },
+        "selected": false,
+        "type": "genericNode"
+      },
+      {
+        "data": {
+          "id": "JsonKeyExtractor-1EGr7",
+          "node": {
+            "base_classes": [
+              "Message"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "Extracts a specified key's value from a JSON object",
+            "display_name": "JSON Key Extractor",
+            "documentation": "",
+            "edited": true,
+            "field_order": [
+              "input_value",
+              "key"
+            ],
+            "frozen": false,
+            "icon": "code",
+            "legacy": false,
+            "metadata": {},
+            "minimized": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Extracted Value",
+                "group_outputs": false,
+                "hidden": null,
+                "method": "get_value",
+                "name": "value",
+                "options": null,
+                "required_inputs": null,
+                "selected": "Message",
+                "tool_mode": true,
+                "types": [
+                  "Message"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "import json\n\nfrom langflow.custom import Component\nfrom langflow.inputs import StrInput\nfrom langflow.io import MessageTextInput, Output\nfrom langflow.schema.message import Message\n\n\nclass JsonKeyExtractor(Component):\n    display_name = \"JSON Key Extractor\"\n    description = \"Extracts a specified key's value from a JSON object\"\n    icon = \"code\"\n\n    # Input/Output configuration\n    inputs = [\n        MessageTextInput(name=\"input_value\", display_name=\"Input Value\"),\n        StrInput(name=\"key\", display_name=\"Key to Select\"),\n    ]\n    outputs = [\n        Output(display_name=\"Extracted Value\", name=\"value\", method=\"get_value\"),\n    ]\n\n    def get_value(self) -> Message:\n        try:\n            data = self.input_value\n            data = json.loads(data)\n\n            result = data[self.key]\n            return Message(text=str(result))\n        except KeyError:\n            raise ValueError(f\"Key '{self.key}' not found in input JSON\")"
+              },
+              "input_value": {
+                "_input_type": "MessageTextInput",
+                "advanced": false,
+                "display_name": "Input Value",
+                "dynamic": false,
+                "info": "",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "input_value",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              },
+              "key": {
+                "_input_type": "StrInput",
+                "advanced": false,
+                "display_name": "Key to Select",
+                "dynamic": false,
+                "info": "",
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "key",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "pdf"
+              }
+            },
+            "tool_mode": false
+          },
+          "showNode": true,
+          "type": "JsonKeyExtractor"
+        },
+        "dragging": false,
+        "id": "JsonKeyExtractor-1EGr7",
+        "measured": {
+          "height": 302,
+          "width": 320
+        },
+        "position": {
+          "x": 280.53205413118366,
+          "y": 397.7208243805209
+        },
+        "selected": false,
+        "type": "genericNode"
+      },
+      {
+        "data": {
+          "id": "SplitText-ifi10",
+          "node": {
+            "base_classes": [
+              "Data",
+              "DataFrame"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "Split text into chunks based on specified criteria.",
+            "display_name": "Recursive Split Text",
+            "documentation": "",
+            "edited": false,
+            "field_order": [
+              "data_inputs",
+              "chunk_overlap",
+              "chunk_size",
+              "text_key"
+            ],
+            "frozen": false,
+            "icon": "scissors-line-dashed",
+            "legacy": false,
+            "lf_version": "1.4.3",
+            "metadata": {},
+            "minimized": false,
+            "official": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Chunks",
+                "group_outputs": false,
+                "method": "split_text",
+                "name": "dataframe",
+                "selected": "DataFrame",
+                "tool_mode": true,
+                "types": [
+                  "DataFrame"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "chunk_overlap": {
+                "_input_type": "IntInput",
+                "advanced": false,
+                "display_name": "Chunk Overlap",
+                "dynamic": false,
+                "info": "Number of characters to overlap between chunks.",
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "chunk_overlap",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "int",
+                "value": 100
+              },
+              "chunk_size": {
+                "_input_type": "IntInput",
+                "advanced": false,
+                "display_name": "Chunk Size",
+                "dynamic": false,
+                "info": "The maximum length of each chunk. Text is first split by separator, then chunks are merged up to this size. Individual splits larger than this won't be further divided.",
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "chunk_size",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "int",
+                "value": 2000
+              },
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "from langchain_text_splitters import CharacterTextSplitter\n\nfrom langflow.custom.custom_component.component import Component\nfrom langflow.io import DropdownInput, HandleInput, IntInput, MessageTextInput, Output\nfrom langflow.schema.data import Data\nfrom langflow.schema.dataframe import DataFrame\nfrom langflow.utils.util import unescape_string\n\n\nclass SplitTextComponent(Component):\n    display_name: str = \"Split Text\"\n    description: str = \"Split text into chunks based on specified criteria.\"\n    icon = \"scissors-line-dashed\"\n    name = \"SplitText\"\n\n    inputs = [\n        HandleInput(\n            name=\"data_inputs\",\n            display_name=\"Data or DataFrame\",\n            info=\"The data with texts to split in chunks.\",\n            input_types=[\"Data\", \"DataFrame\"],\n            required=True,\n        ),\n        IntInput(\n            name=\"chunk_overlap\",\n            display_name=\"Chunk Overlap\",\n            info=\"Number of characters to overlap between chunks.\",\n            value=200,\n        ),\n        IntInput(\n            name=\"chunk_size\",\n            display_name=\"Chunk Size\",\n            info=(\n                \"The maximum length of each chunk. Text is first split by separator, \"\n                \"then chunks are merged up to this size. \"\n                \"Individual splits larger than this won't be further divided.\"\n            ),\n            value=1000,\n        ),\n        MessageTextInput(\n            name=\"separator\",\n            display_name=\"Separator\",\n            info=(\n                \"The character to split on. Use \\\\n for newline. \"\n                \"Examples: \\\\n\\\\n for paragraphs, \\\\n for lines, . for sentences\"\n            ),\n            value=\"\\n\",\n        ),\n        MessageTextInput(\n            name=\"text_key\",\n            display_name=\"Text Key\",\n            info=\"The key to use for the text column.\",\n            value=\"text\",\n            advanced=True,\n        ),\n        DropdownInput(\n            name=\"keep_separator\",\n            display_name=\"Keep Separator\",\n            info=\"Whether to keep the separator in the output chunks and where to place it.\",\n            options=[\"False\", \"True\", \"Start\", \"End\"],\n            value=\"False\",\n            advanced=True,\n        ),\n    ]\n\n    outputs = [\n        Output(display_name=\"Chunks\", name=\"dataframe\", method=\"split_text\"),\n    ]\n\n    def _docs_to_data(self, docs) -> list[Data]:\n        return [Data(text=doc.page_content, data=doc.metadata) for doc in docs]\n\n    def _fix_separator(self, separator: str) -> str:\n        \"\"\"Fix common separator issues and convert to proper format.\"\"\"\n        if separator == \"/n\":\n            return \"\\n\"\n        if separator == \"/t\":\n            return \"\\t\"\n        return separator\n\n    def split_text_base(self):\n        separator = self._fix_separator(self.separator)\n        separator = unescape_string(separator)\n\n        if isinstance(self.data_inputs, DataFrame):\n            if not len(self.data_inputs):\n                msg = \"DataFrame is empty\"\n                raise TypeError(msg)\n\n            self.data_inputs.text_key = self.text_key\n            try:\n                documents = self.data_inputs.to_lc_documents()\n            except Exception as e:\n                msg = f\"Error converting DataFrame to documents: {e}\"\n                raise TypeError(msg) from e\n        else:\n            if not self.data_inputs:\n                msg = \"No data inputs provided\"\n                raise TypeError(msg)\n\n            documents = []\n            if isinstance(self.data_inputs, Data):\n                self.data_inputs.text_key = self.text_key\n                documents = [self.data_inputs.to_lc_document()]\n            else:\n                try:\n                    documents = [input_.to_lc_document() for input_ in self.data_inputs if isinstance(input_, Data)]\n                    if not documents:\n                        msg = f\"No valid Data inputs found in {type(self.data_inputs)}\"\n                        raise TypeError(msg)\n                except AttributeError as e:\n                    msg = f\"Invalid input type in collection: {e}\"\n                    raise TypeError(msg) from e\n        try:\n            # Convert string 'False'/'True' to boolean\n            keep_sep = self.keep_separator\n            if isinstance(keep_sep, str):\n                if keep_sep.lower() == \"false\":\n                    keep_sep = False\n                elif keep_sep.lower() == \"true\":\n                    keep_sep = True\n                # 'start' and 'end' are kept as strings\n\n            splitter = CharacterTextSplitter(\n                chunk_overlap=self.chunk_overlap,\n                chunk_size=self.chunk_size,\n                separator=separator,\n                keep_separator=keep_sep,\n            )\n            return splitter.split_documents(documents)\n        except Exception as e:\n            msg = f\"Error splitting text: {e}\"\n            raise TypeError(msg) from e\n\n    def split_text(self) -> DataFrame:\n        return DataFrame(self._docs_to_data(self.split_text_base()))\n"
+              },
+              "data_inputs": {
+                "_input_type": "HandleInput",
+                "advanced": false,
+                "display_name": "Data or DataFrame",
+                "dynamic": false,
+                "info": "The data with texts to split in chunks.",
+                "input_types": [
+                  "Data",
+                  "DataFrame"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "data_inputs",
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "trace_as_metadata": true,
+                "type": "other",
+                "value": ""
+              },
+              "keep_separator": {
+                "_input_type": "DropdownInput",
+                "advanced": true,
+                "combobox": false,
+                "dialog_inputs": {},
+                "display_name": "Keep Separator",
+                "dynamic": false,
+                "info": "Whether to keep the separator in the output chunks and where to place it.",
+                "name": "keep_separator",
+                "options": [
+                  "False",
+                  "True",
+                  "Start",
+                  "End"
+                ],
+                "options_metadata": [],
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "toggle": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "False"
+              },
+              "separator": {
+                "_input_type": "MessageTextInput",
+                "advanced": false,
+                "display_name": "Separator",
+                "dynamic": false,
+                "info": "The character to split on. Use \\n for newline. Examples: \\n\\n for paragraphs, \\n for lines, . for sentences",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "separator",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "\n"
+              },
+              "text_key": {
+                "_input_type": "MessageTextInput",
+                "advanced": true,
+                "display_name": "Text Key",
+                "dynamic": false,
+                "info": "The key to use for the text column.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "text_key",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "text"
+              }
+            },
+            "tool_mode": false
+          },
+          "showNode": true,
+          "type": "SplitText"
+        },
+        "dragging": false,
+        "id": "SplitText-ifi10",
+        "measured": {
+          "height": 331,
+          "width": 320
+        },
+        "position": {
+          "x": 1229.3455170353047,
+          "y": 478.26863193474094
+        },
+        "selected": false,
+        "type": "genericNode"
+      },
+      {
+        "data": {
+          "id": "JsonKeyExtractor-ZhxtU",
+          "node": {
+            "base_classes": [
+              "Message"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "Extracts a specified key's value from a JSON object",
+            "display_name": "JSON Key Extractor",
+            "documentation": "",
+            "edited": true,
+            "field_order": [
+              "input_value",
+              "key"
+            ],
+            "frozen": false,
+            "icon": "code",
+            "legacy": false,
+            "metadata": {},
+            "minimized": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Extracted Value",
+                "group_outputs": false,
+                "hidden": null,
+                "method": "get_value",
+                "name": "value",
+                "options": null,
+                "required_inputs": null,
+                "selected": "Message",
+                "tool_mode": true,
+                "types": [
+                  "Message"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "import json\n\nfrom langflow.custom import Component\nfrom langflow.inputs import StrInput\nfrom langflow.io import MessageTextInput, Output\nfrom langflow.schema.message import Message\n\n\nclass JsonKeyExtractor(Component):\n    display_name = \"JSON Key Extractor\"\n    description = \"Extracts a specified key's value from a JSON object\"\n    icon = \"code\"\n\n    # Input/Output configuration\n    inputs = [\n        MessageTextInput(name=\"input_value\", display_name=\"Input Value\"),\n        StrInput(name=\"key\", display_name=\"Key to Select\"),\n    ]\n    outputs = [\n        Output(display_name=\"Extracted Value\", name=\"value\", method=\"get_value\"),\n    ]\n\n    def get_value(self) -> Message:\n        try:\n            data = self.input_value\n            data = json.loads(data)\n\n            result = data[self.key]\n            return Message(text=str(result))\n        except KeyError:\n            raise ValueError(f\"Key '{self.key}' not found in input JSON\")"
+              },
+              "input_value": {
+                "_input_type": "MessageTextInput",
+                "advanced": false,
+                "display_name": "Input Value",
+                "dynamic": false,
+                "info": "",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "input_value",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              },
+              "key": {
+                "_input_type": "StrInput",
+                "advanced": false,
+                "display_name": "Key to Select",
+                "dynamic": false,
+                "info": "",
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "key",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "pdf"
+              }
+            },
+            "tool_mode": false
+          },
+          "showNode": true,
+          "type": "JsonKeyExtractor"
+        },
+        "dragging": false,
+        "id": "JsonKeyExtractor-ZhxtU",
+        "measured": {
+          "height": 302,
+          "width": 320
+        },
+        "position": {
+          "x": 279.2073873042128,
+          "y": 847.3051798482776
+        },
+        "selected": false,
+        "type": "genericNode"
+      },
+      {
+        "data": {
+          "id": "ContractSummarizer-xEf8m",
+          "node": {
+            "base_classes": [
+              "Message"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "Extracts and summarizes from contract documents using a multi-step LLM refinement chain.",
+            "display_name": "Legal Contract Summarizer",
+            "documentation": "",
+            "edited": true,
+            "field_order": [
+              "contract_chunks",
+              "document_variable_name",
+              "key",
+              "initial_summary_prompt",
+              "refinement_prompt",
+              "llm"
+            ],
+            "frozen": false,
+            "icon": "code",
+            "legacy": false,
+            "lf_version": "1.4.3",
+            "metadata": {},
+            "minimized": false,
+            "official": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Summary JSON",
+                "hidden": false,
+                "method": "build",
+                "name": "response",
+                "options": null,
+                "required_inputs": null,
+                "selected": "Message",
+                "tool_mode": true,
+                "types": [
+                  "Message"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "import json\n\nfrom langchain.chains import load_summarize_chain\nfrom langchain_core.output_parsers import JsonOutputParser\nfrom langchain_core.prompts import PromptTemplate\nfrom langflow.custom import Component\nfrom langflow.inputs import DataInput, StrInput, MessageInput, HandleInput\nfrom langflow.schema import Message\nfrom langflow.template import Output\n\n\nclass ContractSummarizerComponent(Component):\n    display_name = \"Legal Contract Summarizer\"\n    description = \"Extracts and summarizes from contract documents using a multi-step LLM refinement chain.\"\n    icon = \"code\"\n    name = \"ContractSummarizer\"\n\n    inputs = [\n        DataInput(\n            name=\"contract_chunks\",\n            display_name=\"Contract Chunks\",\n            info=\"A list of LangChain-compatible Document chunks representing a legal contract.\",\n            required=True\n        ),\n        StrInput(\n            name=\"document_variable_name\",\n            display_name=\"Prompt Variable Name\",\n            info=\"The variable name used in your prompt templates that will hold the contract chunks (e.g. 'text').\",\n            required=True\n        ),\n        StrInput(\n            name=\"key\",\n            display_name=\"Key\",\n            info=\"The key name that will be used to label the output summary in the returned JSON object.\",\n            required=True\n        ),\n        MessageInput(\n            name=\"initial_summary_prompt\",\n            display_name=\"Initial Summary Prompt\",\n            info=\"Prompt used to summarize the first chunk of the contract.\",\n            required=True\n        ),\n        MessageInput(\n            name=\"refinement_prompt\",\n            display_name=\"Refinement Prompt\",\n            info=\"Prompt used to refine the summary based on additional contract chunks.\",\n            required=True\n        ),\n        HandleInput(\n            name=\"llm\",\n            display_name=\"Language Model\",\n            input_types=[\"LanguageModel\"],\n            info=\"The LLM used to run the summarization chain.\",\n            required = True\n        ),\n    ]\n\n    outputs = [\n        Output(\n            name=\"response\",\n            display_name=\"Summary JSON\",\n            method=\"build\",\n        )\n    ]\n\n\n    # Helper method to build a LangChain PromptTemplate from LangFlow's Message format\n    def build_prompt(self, prompt_template: Message) -> PromptTemplate:\n        variables = {}\n        template = prompt_template.template # Get the raw template string with {variables}\n\n        # Extract and resolve variables from the Message object\n        for var in prompt_template.variables:\n            if isinstance(prompt_template.variables[var], Message):\n                variables[var] = prompt_template.variables[var].text\n                print(f\"supposed value of variable {variables[var]}\")\n            else:\n                variables[var] = \"\" # Leave empty if not defined yet\n        self.log(variables, \"build_prompt\")\n\n        # Create PromptTemplate from the raw string\n        final_prompt = PromptTemplate.from_template(template)\n\n        # Partially fill in the template only with variables that have values\n        for key, value in variables.items():\n            print(f\"KEY {key} , VALUE {value}\")\n            if value != \"\":\n                final_prompt = final_prompt.partial(**{key: value})\n\n        self.log(final_prompt, \"build_prompt\")\n        return final_prompt\n\n    # Main method where the component runs its logic\n    def build(self) -> Message:\n        contract_parts = []\n\n        # Convert all inputs into LangChain Document objects\n        for data in self.contract_chunks:\n            contract_parts.append(data.to_lc_document())\n\n        print(f\"This is the data input for 3. Date: {contract_parts}\")\n\n        # Build initial and refine prompt templates from provided Messages\n        initial_prompt = self.build_prompt(self.initial_summary_prompt)\n        refine_prompt = self.build_prompt(self.refinement_prompt)\n\n        # Create a LangChain summarization chain using the 'refine' strategy\n        chain = load_summarize_chain(\n            llm=self.llm,\n            chain_type=\"refine\",\n            question_prompt=initial_prompt,\n            refine_prompt=refine_prompt,\n            return_intermediate_steps=True,\n            input_key=self.document_variable_name,\n            verbose=True,\n            output_key=\"output_text\",\n        )\n\n        result = chain({self.document_variable_name: contract_parts}, return_only_outputs=True)\n        print(f\"Result: {result}\")\n\n        parser = JsonOutputParser()\n\n        return Message(text=json.dumps({self.key: parser.parse(result[\"output_text\"])}, indent=3))"
+              },
+              "contract_chunks": {
+                "_input_type": "DataInput",
+                "advanced": false,
+                "display_name": "Contract Chunks",
+                "dynamic": false,
+                "info": "A list of LangChain-compatible Document chunks representing a legal contract.",
+                "input_types": [
+                  "Data"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "contract_chunks",
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "other",
+                "value": ""
+              },
+              "document_variable_name": {
+                "_input_type": "StrInput",
+                "advanced": false,
+                "display_name": "Prompt Variable Name",
+                "dynamic": false,
+                "info": "The variable name used in your prompt templates that will hold the contract chunks (e.g. 'text').",
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "document_variable_name",
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "text"
+              },
+              "initial_summary_prompt": {
+                "_input_type": "MessageInput",
+                "advanced": false,
+                "display_name": "Initial Summary Prompt",
+                "dynamic": false,
+                "info": "Prompt used to summarize the first chunk of the contract.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "initial_summary_prompt",
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              },
+              "key": {
+                "_input_type": "StrInput",
+                "advanced": false,
+                "display_name": "Key",
+                "dynamic": false,
+                "info": "The key name that will be used to label the output summary in the returned JSON object.",
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "key",
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "contract_overview"
+              },
+              "llm": {
+                "_input_type": "HandleInput",
+                "advanced": false,
+                "display_name": "Language Model",
+                "dynamic": false,
+                "info": "The LLM used to run the summarization chain.",
+                "input_types": [
+                  "LanguageModel"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "llm",
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "trace_as_metadata": true,
+                "type": "other",
+                "value": ""
+              },
+              "refinement_prompt": {
+                "_input_type": "MessageInput",
+                "advanced": false,
+                "display_name": "Refinement Prompt",
+                "dynamic": false,
+                "info": "Prompt used to refine the summary based on additional contract chunks.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "refinement_prompt",
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              }
+            },
+            "tool_mode": false
+          },
+          "showNode": true,
+          "type": "ContractSummarizer"
+        },
+        "dragging": false,
+        "id": "ContractSummarizer-xEf8m",
+        "measured": {
+          "height": 572,
+          "width": 320
+        },
+        "position": {
+          "x": 1998.4623155058523,
+          "y": 1180.4660941195796
+        },
+        "selected": false,
+        "type": "genericNode"
+      }
+    ],
+    "viewport": {
+      "x": 323.88887378114566,
+      "y": -96.40966823313431,
+      "zoom": 0.34549276731274975
+    }
+  },
+  "description": "This flow automates the extraction of key overview information (such as contract type, signing date, vendor details, and client details) from a contract document. It ingests a PDF file path and contract title (typically provided in a JSON format via chat input). The PDF is processed to extract its text, which is then divided into smaller chunks. An Amazon Bedrock Large Language Model, guided by specialized initial and refinement prompts within a multi-step summarization chain, iteratively analyzes these chunks. The use case is to efficiently obtain a structured JSON output detailing the contract's fundamental overview elements, which is then presented in the chat.",
+  "endpoint_name": null,
+  "id": "8b7f96d3-489f-427c-9b0c-043e7a424b2c",
+  "is_component": false,
+  "last_tested_version": "1.4.3",
+  "name": "1. Contract Overview",
+  "tags": ["example"]
+}

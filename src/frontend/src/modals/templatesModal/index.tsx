@@ -32,6 +32,12 @@ export default function TemplatesModal({
       ],
     },
     {
+      title: "Language Studio",
+      items: [
+        { title: "Example", icon: "Languages", id: "example" },
+      ],
+    },
+    {
       title: "Use Cases",
       items: [
         { title: "Assistants", icon: "BotMessageSquare", id: "assistants" },
@@ -54,7 +60,7 @@ export default function TemplatesModal({
         { title: "RAG", icon: "Database", id: "rag" },
         { title: "Agents", icon: "Bot", id: "agents" },
       ],
-    },
+    }
   ];
 
   return (
