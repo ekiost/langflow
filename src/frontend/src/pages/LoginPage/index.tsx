@@ -53,7 +53,7 @@ export default function LoginPage(): JSX.Element {
 
   useEffect(() => {
     // You can define the origin here or get it from an environment variable
-    const PARENT_ORIGIN = 'http://localhost:3000'; // Change to your parent page's actual origin
+    const PARENT_ORIGIN = 'http://localhost:5001'; // Change to your parent page's actual origin
 
     // 1. Announce that the iframe is ready for credentials
     console.log("Iframe is ready, announcing to parent.");
@@ -67,31 +67,12 @@ export default function LoginPage(): JSX.Element {
         return;
       }
 
-      const { type, credentials } = event.data;
+      const { type, token, refresh_token } = event.data;
 
-      // 3. If we receive credentials, perform the login directly
-      if (type === 'credentials' && credentials) {
-        console.log('Received credentials from parent. Attempting to log in.');
-
-        // The performLogin logic is now an anonymous function here
-        mutate(
-          {
-            username: credentials.username,
-            password: credentials.password,
-          },
-          {
-            onSuccess: (data) => {
-              login(data.access_token, "login", data.refresh_token);
-            },
-            onError: (error) => {
-              console.error("Iframe login failed:", error);
-              setErrorData({
-                title: "Iframe Login Failed",
-                list: [error?.response?.data?.detail ?? "An unknown error occurred."],
-              });
-            },
-          }
-        );
+      // 3. If we receive a token, perform the login directly
+      if (type === 'token' && token) {
+        console.log('Received token from parent. Attempting to log in.');
+        login(token, "login", refresh_token);
       }
     };
 

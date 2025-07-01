@@ -1,0 +1,68 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Langflow Secure Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-50 font-sans text-gray-800">
+    <div class="mx-auto flex h-screen w-screen flex-col p-6">
+      <h1 class="mb-6 text-center text-3xl font-bold">
+        Langflow Secure Login
+      </h1>
+      <iframe
+        id="langflowFrame"
+        src="{{ langflow_url }}"
+        title="Langflow"
+        class="h-full w-full rounded-md border border-gray-300"
+      ></iframe>
+    </div>
+
+    <script>
+      const iframe = document.getElementById("langflowFrame");
+      const langflowOrigin = "{{ langflow_url }}";
+
+      // 1. Listen for the 'ready' message from the iframe
+      window.addEventListener("message", (event) => {
+        // IMPORTANT: Verify the message is from our trusted iframe
+        if (event.origin !== langflowOrigin) {
+          return;
+        }
+
+        // 2. Check if the message type is what we expect
+        if (event.data.type === "ready") {
+          console.log(
+            "Parent received 'ready' signal from iframe. Requesting token.",
+          );
+
+          // 3. Send a POST request to the proxy server to get a token
+          fetch("/login", {
+            method: "POST",
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.error) {
+                console.error("Login failed:", data.error);
+                return;
+              }
+              console.log("Token received, sending to iframe.");
+              // 4. Send the token to the iframe
+              iframe.contentWindow.postMessage(
+                {
+                  type: "token",
+                  token: data.access_token,
+                  refresh_token: data.refresh_token,
+                },
+                langflowOrigin, // Target the iframe's origin
+              );
+            })
+            .catch((error) => {
+              console.error("Error during login:", error);
+            });
+        }
+      });
+    </script>
+  </body>
+</html>
