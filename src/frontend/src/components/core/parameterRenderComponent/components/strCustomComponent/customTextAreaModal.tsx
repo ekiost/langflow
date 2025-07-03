@@ -18,7 +18,9 @@ interface CustomTextAreaModalProps {
 // For security, specify the origin of the iframe's content.
 // If served from the same domain, this is correct. For external domains,
 // use the specific origin (e.g., "https://forms.example.com").
-const IFRAME_ORIGIN = window.location.origin;
+// const IFRAME_ORIGIN = window.location.origin;
+const IFRAME_ORIGIN = "https://languagestudio.com";
+
 
 /*
   IMPORTANT: The page hosted at IFRAME_SRC (`/json-form-page.html`) needs to
