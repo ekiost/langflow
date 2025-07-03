@@ -25,8 +25,7 @@ export default defineConfig(({ mode }) => {
   const target =
     env.VITE_PROXY_TARGET || PROXY_TARGET || "http://localhost:7860";
 
-  // const port = Number(env.VITE_PORT) || PORT || 3000;
-  const port = Number(env.VITE_PORT) || PORT || 3001;
+  const port = Number(env.VITE_PORT) || PORT || 3000;
 
   const proxyTargets = apiRoutes.reduce((proxyObj, route) => {
     proxyObj[route] = {
