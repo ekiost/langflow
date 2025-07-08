@@ -269,6 +269,8 @@ stuff/*
 src/frontend/playwright-report/index.html
 *.bak
 prof/*
+nginx/langflow.languagestudio.com-key.pem
+nginx/langflow.languagestudio.com.pem
 
 src/frontend/temp
 *-shm

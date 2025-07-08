@@ -27,6 +27,7 @@ export default defineConfig(({ mode }) => {
 
   const port = Number(env.VITE_PORT) || PORT || 3000;
 
+
   const proxyTargets = apiRoutes.reduce((proxyObj, route) => {
     proxyObj[route] = {
       target: target,

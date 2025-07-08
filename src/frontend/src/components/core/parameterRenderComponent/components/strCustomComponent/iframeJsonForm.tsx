@@ -14,7 +14,7 @@ const IframeJsonForm = forwardRef<HTMLIFrameElement, IframeJsonFormProps>((props
     const get_iframe_source = () => {
         switch (props.modal) {
             default:
-                return "https://devdemo.languagestudio.com/langflow/popup"
+                return props.modal
         }
     }
 

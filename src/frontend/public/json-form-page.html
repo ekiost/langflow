@@ -71,7 +71,8 @@
     // For local development, this is typically 'http://localhost:3000' or similar.
     // For production, it would be 'https://your-app.com'.
     // window.location.origin from the parent is passed for security.
-    const PARENT_ORIGIN = new URL(document.referrer).origin;
+    // const PARENT_ORIGIN = new URL(document.referrer).origin;
+    const PARENT_ORIGIN = "https://langflow.languagestudio.com:3000"; // Replace with your actual origin
 
     // --- DOM ELEMENT REFERENCES ---
     const nameInput = document.getElementById("name-input");
