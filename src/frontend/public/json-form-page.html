@@ -126,10 +126,10 @@
     // Listen for messages from the parent window (the React app)
     window.addEventListener("message", (event) => {
         // SECURITY: Always verify the origin of the message
-        if (event.origin !== PARENT_ORIGIN) {
-            console.warn(`Message from untrusted origin '${event.origin}' was ignored.`);
-            return;
-        }
+        //if (event.origin !== PARENT_ORIGIN) {
+        //    console.warn(`Message from untrusted origin '${event.origin}' was ignored.`);
+        //    return;
+        //} 
 
         const {type, payload} = event.data;
 

@@ -1,12 +1,11 @@
 from typing import Dict, List
-from loguru import logger
+import httpx
+import asyncio
+
 
 from langflow.helpers.flow import run_flow
 from langflow.base.flow_processing.utils import build_data_from_run_outputs
-import requests
-
-
-class FlowAPI
+import asyncio
 
 class Flow:
     """
@@ -57,7 +56,6 @@ class Flow:
             )
             self._is_completed = True
         except Exception as e:
-            logger.exception("Oof!" + str(e))
             raise RuntimeError("Oof!" + str(e)) from e
 
     async def run_flow_with_retries(self):
@@ -82,30 +80,30 @@ class Flow:
                     data.extend(build_data_from_run_outputs(result))
 
         for datum in data:
-            output += datum.data.get("text", "")
+            output = datum.data.get("text", "")
 
         return output
 
-    def collect_result_as_dict(self) -> Dict:
-        """
-        Converts the flow output into a merged dictionary.
+    # def collect_result_as_dict(self) -> Dict:
+    #     """
+    #     Converts the flow output into a merged dictionary.
 
-        Returns:
-            dict: A dictionary containing merged data from all outputs.
-        """
-        output = {}
-        data = []
-        if isinstance(self._results, list):
-            for result in self._results:
-                if result:
-                    data.extend(build_data_from_run_outputs(result))
+    #     Returns:
+    #         dict: A dictionary containing merged data from all outputs.
+    #     """
+    #     output = {}
+    #     data = []
+    #     if isinstance(self._results, list):
+    #         for result in self._results:
+    #             if result:
+    #                 data.extend(build_data_from_run_outputs(result))
 
-        for datum in data:
-            text_data = datum.data.get("text", "")
-            print(f"This is data ******************\n{text_data}")
-            output = self.merge_string_to_dict(text_data, output)
+    #     for datum in data:
+    #         text_data = datum.data.get("text", "")
+    #         print(f"This is data ******************\n{text_data}")
+    #         output = self.merge_string_to_dict(text_data, output)
 
-        return output
+    #     return output
 
     def get_flow_name(self) -> str:
         """
@@ -132,32 +130,33 @@ class Flow:
         """
         return self._is_completed
     
-    def merge_string_to_dict(string: str, dict: Dict) -> Dict:
-        """
-        Parses a JSON-like string into a dictionary and merges it with another dictionary.
+    # def merge_string_to_dict(string: str, dict: Dict) -> Dict:
+    #     """
+    #     Parses a JSON-like string into a dictionary and merges it with another dictionary.
 
-        Args:
-        string (str): String to convert into a dictionary.
-        dict (Dict): Dictionary to merge into.
+    #     Args:
+    #     string (str): String to convert into a dictionary.
+    #     dict (Dict): Dictionary to merge into.
 
-        Returns:
-        Dict: Merged dictionary.
+    #     Returns:
+    #     Dict: Merged dictionary.
 
-        Raises:
-        RuntimeError: If the string cannot be safely parsed.
-        """
+    #     Raises:
+    #     RuntimeError: If the string cannot be safely parsed.
+    #     """
 
-        # attempt to convert string into Dictionary structure
-        try:
-            string_dict = ast.literal_eval(string)
-        except Exception as e:
-            msg = f"Error converting string input to dict: " + string
-            logger.exception(msg + "string:" + string)
-            raise RuntimeError(msg) from e
-
-        # merge dicts
-        dict = string_dict | dict
-        return dict
+    #     # attempt to convert string into Dictionary structure
+    #     try:
+    #         string_dict = ast.literal_eval(string)
+    #     except Exception as e:
+    #         msg = f"Error converting string input to dict: " + string
+    #         logger.exception(msg + "string:" + string)
+    #         # raise RuntimeError(msg) from e
+    #         string_dict = {"result": string}
+        
+    #     # merge dicts
+    #     dict = string_dict | dict
+    #     return dict
 
 
 class FlowManager:
@@ -189,3 +188,4 @@ class FlowManager:
         """
         if flow in self._flows:
             self._flows.remove(flow)
+

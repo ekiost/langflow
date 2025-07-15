@@ -14,11 +14,11 @@ from langflow.inputs.inputs import (
 from langflow.schema import Data, dotdict
 from langflow.template import Output
 
-from langflow.test.Flow import Flow
+from langflow.test.FlowAPI import FlowAPI
 from langflow.helpers.flow import run_flow
 from langflow.base.flow_processing.utils import build_data_from_run_outputs
 
-def merge_string_to_dict(string: str, dict: Dict) -> Dict:
+def merge_string_to_dict(string: str | Dict, dict: Dict) -> Dict:
     """
     Parses a JSON-like string into a dictionary and merges it with another dictionary.
 
@@ -35,36 +35,46 @@ def merge_string_to_dict(string: str, dict: Dict) -> Dict:
 
     # attempt to convert string into Dictionary structure
     try:
+        
         string_dict = ast.literal_eval(string)
+        
     except Exception as e:
-        msg = f"Error converting string input to dict: " + string
-        logger.exception(msg + "string:" + string)
-        raise RuntimeError(msg) from e
+        if(isinstance(string,str)):
+        # Cast to string
+            string_dict = {"Result": string}
+        
+        if(isinstance(string, Dict)):
+            string_dict = string
 
     # merge dicts
     dict = string_dict | dict
     return dict
 
 
-class FlowRunner(Component):
-    display_name = "Flow Runner (Upgraded)"
+class FlowRunnerAPI(Component):
+    display_name = "Flow Runner API(Upgraded)"
     description = "Component to run multiple flows sequentially.\n Removes invalid and duplicate flows to run."
     documentation: str = "https://docs.langflow.org/components-custom-components"
     icon = "code"
     name = "CustomComponent"
-    flow_name_selected = ""
-    validated_flows: List[str] = []
     icon = "FAISS"
+    
+    class DemoClass():
+        def something(self):
+            return True
+    
+    demo = DemoClass()
     
     inputs = [
         MessageTextInput(
             name="input_value",
             display_name="Flows to Run",
             info="This is input accepts only valid flows that exist in the LangFlow server. \n Removes inputs that are invalid Flows or duplicate Flows.",
-            value="",
+            value="Test Flow",
             is_list=True,
             tool_mode=True,
             real_time_refresh=True,
+            input_types=[],
         ),
         DropdownInput(
             name="mode",
@@ -98,7 +108,39 @@ class FlowRunner(Component):
             modal="json-form-page.html",
             info="Click here to input Flows to run",
             dynamic=True,
-            real_time_refresh=True)
+            real_time_refresh=True),
+        
+        MessageTextInput(
+            name="LangflowAPI",
+            display_name="Langflow API key (optional)",
+            value="",
+            info="API key to use for the Langflow API",
+            advanced=True,
+            show=True,
+        ),
+        MessageTextInput(
+            name="API_URL",
+            display_name="URL of the API to call",
+            value="",
+            info="URL of the Langflow API to call",
+            advanced=True,
+            show=True,
+        ),
+        MessageTextInput(
+            name="payload",
+            display_name="input_payload",
+            value="",
+            info="Name of the Flow to run",
+            advanced=True,
+            show=True,
+        ),
+        MessageTextInput(
+            name="flow_uuid",
+            display_name="UUID of Flows to Run",
+            value=[],
+            advanced=True,
+            is_list=True,
+            show=True)
     ]
 
     outputs = [
@@ -157,8 +199,8 @@ class FlowRunner(Component):
             if (flow in valid_flows) and (flow not in validated_flows):
                 # if the flow input is not already in the validated_flows
                 validated_flows.append(flow)
-            if flow == "" and is_last:
-                validated_flows.append("")
+            #if flow == "" and is_last:
+            #    validated_flows.append("")
     
         return validated_flows
     
@@ -180,7 +222,7 @@ class FlowRunner(Component):
                 return ""
             
         except Exception as e:
-            self.log(e, "Exception while parsing string to dict:")
+            self.log(str(e), "Exception while parsing string to dict:")
             return ""
 
         # Check if it's a dictionary and contains the key
@@ -189,66 +231,20 @@ class FlowRunner(Component):
             return parsed_dict[key]
         else: return ""
 
-    # Function to run the flows in the flows_to_run with the input_value for the flows and collate their results as JSON)
-    async def run_flows_and_collate_results(self, flows_to_run: List, input_value):
-        """
-        Runs selected flows sequentially and merges their results.
-
-        Args:
-            flows_to_run (List): List of flow names to run.
-            input_value (str): Serialized input (JSON string) passed into each flow.
-
-        Returns:
-            dict: Merged output dictionary containing keys/values from each flow's output.
-        """
-        tweaks = {}
-        output = {}
-
-        for flow_name_selected in flows_to_run:
-            if flow_name_selected == "" or flow_name_selected is None: continue
-
-            try:
-                results = await run_flow(
-                    inputs={"input_value": input_value},
-                    output_type="all",
-                    flow_id=None,
-                    flow_name=flow_name_selected,
-                    tweaks=tweaks,
-                    user_id=str(self.user_id),
-                    session_id=self.graph.session_id or self.session_id,
-                )
-
-                # Extract data from the results RunOutput produced
-                data = []
-                if isinstance(results, list):
-                    for result in results:
-                        if result:
-                            data.extend(build_data_from_run_outputs(result))
-
-                # Access each data fragment and merge it into the output dict
-                for datum in data:
-                    print(f"This is data ******************\n{datum.data['text']}")
-                    output = merge_string_to_dict(datum.data["text"], output)
-
-            except Exception as e:
-                mode = self._attributes.get("mode")
-                self.log(mode, "The mode is : ")
-                msg = f"Oof!"
-                logger.exception(msg)
-                if (mode == "Break"):
-                    raise RuntimeError(msg) from e
-                elif (mode == "Cascade"):
-                    continue
-
-        return output
-
     async def build_list_of_flows(self, flows_to_run: List, input_value) -> List:
         list_of_flows = []
 
-        for flow_name_selected in flows_to_run:
+        for idx, flow_name_selected in enumerate(flows_to_run):
             if flow_name_selected == "" or flow_name_selected is None: continue
+            self.log(idx)
+            new_flow = FlowAPI("http://langflow.languagestudio.com:3001")
+            if(idx==1): new_flow.set_flow_id("1234")
+            else: new_flow.set_flow_id("cd625a2d-41c8-4f55-ad45-a3741bb7989e")
+            new_flow.add_payload("input_value", input_value)
+            new_flow.prepare_default_payload()
+            new_flow.add_Langflow_API_key("sk-8Ug6pxMHtKk6uVKGslRJ1uFMBi4wvgHr7YiRtJJt-5w")
+            
 
-            new_flow = Flow(flow_name_selected, input_value, self.user_id, 1)
             list_of_flows.append(new_flow)
 
             self.log(flow_name_selected, "Added to flows to run")
@@ -257,20 +253,35 @@ class FlowRunner(Component):
 
     async def run_flows(self, flows: List):
         for flow in flows:
-            if isinstance(flow, Flow):
-                await flow.run_flow()
+            if isinstance(flow, FlowAPI):
+                success = await flow.send_request()
                 self.log(flow.get_flow_name(), "Successful flow run")
             else:
                 self.log(flow.get_flow_name(), "Error running flow")
                 
-
+    async def run_flows_in_parallel(self, flows: List):
+        tasks = []
+        for flow in flows:
+            if isinstance(flow, FlowAPI):
+                tasks.append(flow.send_request())
+            else: 
+                self.log("Non-FlowAPI object in flows list")
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+        
+        for i, result in enumerate(results):
+            flow = flows[i]
+            if isinstance(result, Exception):
+                self.log(f"❌ Flow {i} failed with error: {result}")
+            else:
+                self.log(flow.get_flow_name(), f"✅ Flow {i} completed: success = {result}")
+                        
     async def collect_results_from_flows_as_dicts(self, flows: List) -> Dict[str, str]:
         results: Dict[str, str] = {}
 
         for flow in flows:
-            if isinstance(flow, Flow):
-                if (flow.is_completed()):
-                    results = merge_string_to_dict(flow.collect_result_as_string(), results)
+            if isinstance(flow, FlowAPI):
+                if (flow.is_response_ready):
+                    results = merge_string_to_dict(flow.collect_response(), results)
                 else:
                     self.log(flow.get_flow_name(), "Is not completed")
             else:
@@ -285,7 +296,7 @@ class FlowRunner(Component):
 
         Args:
             build_config (dotdict): Current configuration.
-            field_value (Any): New field value.
+            field_value (Any): New field value. 
             field_name (str | None): Name of the field being updated.
 
         Returns:
@@ -300,11 +311,11 @@ class FlowRunner(Component):
         if field_name == "flows":
             flow_to_add = await self.get_value_from_str_dict(build_config["flows"]["value"], "name")
 
-            
             if flow_to_add: 
                 updated_flows = build_config["input_value"]["value"]
                 updated_flows.append(flow_to_add)
                 build_config["input_value"]["value"] = await self.validate_flows(updated_flows)
+                build_config["flows"]["value"] = ""
                 
         return build_config
 
@@ -320,26 +331,42 @@ class FlowRunner(Component):
             Data: Final structured output with results of all processed flows.
         """
         
+        flows_selected = self._attributes.get("input_value")
         
-        # flows_selected = self._attributes.get("input_value")
+        # flow = FlowAPI("http://langflow.languagestudio.com:3001", "run", "v1")
+        # flow.prepare_default_payload()
+        # flow.add_payload("input_value", self._attributes.get("flow_value"))
+        # flow.set_flow_id(flows_selected[0])
+        # flow.add_Langflow_API_key(self._attributes.get("LangflowAPI"))        
+        
+        
         # self.log(flows_selected, "Flows selected")
+        # output={}
         
-        # await self.get_flow(flows_selected[0])
+        # success = await flow.send_request()
         
-        # inputs = self._attributes.get("flow_value")
-        # self.log(inputs, "inputs")
+        # self.log(flow.is_response_ready(), "Flow response ready")
+        # if success:
+        #     output = flow.collect_response()
+            
+        # result = {'result' :output}
+        # self.log(result, "Flow result")
+        # return Data(data=result)
         
-        # flows_to_run = await self.build_list_of_flows(flows_selected, inputs)
-        # self.log(type(flows_to_run).__name__, "Flows to run type")
+        output={}
+        
+        inputs = self._attributes.get("flow_value")
+        self.log(inputs, "inputs")
+        dict_input = {"inputs": inputs}
+            
+        flows_to_run = await self.build_list_of_flows(flows_selected, inputs)
+        self.log(type(flows_to_run).__name__, "Flows to run type")
 
+        await self.run_flows_in_parallel(flows_to_run)
         # await self.run_flows(flows_to_run)
-        # results = await self.collect_results_from_flows_as_dicts(flows_to_run)
-
-        # output = merge_string_to_dict(inputs, results)
-        # self.log(output, "output")
-        output = {}
+        results = await self.collect_results_from_flows_as_dicts(flows_to_run)
         
-        output["Output"] = await self.get_value_from_str_dict(self.flows, "name")
+        output = merge_string_to_dict(dict_input, results)
+        self.log(output, "output")
         
         return Data(data=output)
-
