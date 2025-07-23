@@ -1,9 +1,7 @@
 import httpx
 import asyncio
 from typing import Dict, List
-
-DEBUG = True
-
+from .LanguageStudioAPI import LanguageStudioAPI
 
 class FlowAPI:
     def __init__(self, base_url: str, api_to_call: str = "run", api_version: str = "v1"):
@@ -65,12 +63,14 @@ class FlowAPI:
             flow_id (str): The flow ID to map.
         """
         # This method is a placeholder for future implementation
-        # Currently, it does not perform any operation
-
-        if len(flow_id) < 10:
-            if flow_id=="1234" : return "cad1331d-c7b5-45ec-84e1-cbcc7718c11b"
-            else: return "cd625a2d-41c8-4f55-ad45-a3741bb7989e"
-        return flow_id
+        # Currently, it does not perform any operation 
+        query = LanguageStudioAPI()
+        resolved_guiid = query.get_flow_profile_guid(flow_id)
+        
+        if not resolved_guiid:
+            print(f"Flow ID {flow_id} could not be resolved to a UUID.")
+            return flow_id
+        return resolved_guiid 
 
     def add_Langflow_API_key(self, key: str):
         """
@@ -140,15 +140,14 @@ class FlowAPI:
 
             url = self._build_request()
             final_payload = self._build_payload()
-
-            if DEBUG:
-                # 🔍 Print full request
-                print("===== HTTP REQUEST =====")
-                print("METHOD:", self._method)
-                print("URL:", url)
-                print("HEADERS:", self._headers)
-                print("PAYLOAD:", final_payload)
-                print("========================")
+            
+            # 🔍 Print full request
+            print("===== HTTP REQUEST =====")
+            print("METHOD:", self._method)
+            print("URL:", url)
+            print("HEADERS:", self._headers)
+            print("PAYLOAD:", final_payload)
+            print("========================")
 
             response = await self._client.request(
                 method=self._method,
@@ -182,7 +181,7 @@ class FlowAPI:
 
     def collect_response(self) -> str:
         try:
-            return (
+            text = (
                 self._output
                 .get("outputs", [{}])[0]
                 .get("outputs", [{}])[0]
@@ -191,28 +190,11 @@ class FlowAPI:
                 .get("data", {})
                 .get("text", "")
             )
-            
+            return text
         except Exception as e:
             print(f"Error collecting response: {e}")
             return ""
-    
-    def collect_result_as_dict(self) -> Dict:
-        """
-        Collect the flow output as a dictionary.
 
-        Returns:
-            dict: A dictionary containing merged data from all outputs.
-        """
-        output = {self._output
-                .get("outputs", [{}])[0]
-                .get("outputs", [{}])[0]
-                .get("results", {})
-                .get("message", {})
-                .get("data", {})
-                .get("text", "")}
-        
-
-        return output
     
     def _extract_output(self) -> str:
         try:
@@ -220,7 +202,8 @@ class FlowAPI:
                 for output in item.get("outputs", []):
                     for result in output.get("results", {}):
                         text= result.get("data", {}).get("text")
-                        if text: return text
+                        if text: 
+                            return text
         except Exception as e:
             print(f"Failed to extract outputs {e}")
         return ""
@@ -234,29 +217,9 @@ class FlowAPI:
             await self._client.aclose()
             self._client = None
     
-class AsyncDemo():
-    async def run_5_seconds(self):
-        """
-        A simple async method that runs for 5 seconds.
-        """
-        print("Running for 5 seconds...")
-        await asyncio.sleep(5)
-        print("Finished running after 5 seconds.")
-    async def run_10_seconds(self):
-        """
-        A simple async method that runs for 10 seconds.
-        """
-        print("Running for 10 seconds...")
-        await asyncio.sleep(10)
-        print("Finished running after 10 seconds.")
-    
-        
-    
 async def main():    
-    flow = FlowAPI("http://langflow.languagestudio.com:3001", "run", "v1")
-    # flow.set_flow_id("cad1331d-c7b5-45ec-84e1-cbcc7718c11b")
-    flow.set_flow_id("1234")
-    flow.add_Langflow_API_key("sk-8Ug6pxMHtKk6uVKGslRJ1uFMBi4wvgHr7YiRtJJt-5w")
+    flow = FlowAPI("https://devdemo.languagestudio.com:3000")
+    flow.set_flow_id("552")
     flow.prepare_default_payload()
     flow.add_payload("input_value", "Tell me about Victor")
 
@@ -264,12 +227,11 @@ async def main():
 
     if success:
         output = flow.collect_response()
-        output2= flow.collect_result_as_dict()
+        
     
     else: output = "Response not ready"
-
     print("=== FINAL OUTPUT ===")
-    print(output2)
+    print(output)
     
     await flow.close_client()
 

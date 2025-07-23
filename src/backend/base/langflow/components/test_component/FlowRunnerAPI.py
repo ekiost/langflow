@@ -9,7 +9,8 @@ from langflow.helpers.flow import get_flow_inputs
 from langflow.inputs.inputs import (
     DropdownInput,
     MessageTextInput,
-    CustomInput
+    CustomInput,
+    IntInput
 )
 from langflow.schema import Data, dotdict
 from langflow.template import Output
@@ -35,7 +36,6 @@ def merge_string_to_dict(string: str | Dict, dict: Dict) -> Dict:
 
     # attempt to convert string into Dictionary structure
     try:
-        
         string_dict = ast.literal_eval(string)
         
     except Exception as e:
@@ -66,11 +66,19 @@ class FlowRunnerAPI(Component):
     demo = DemoClass()
     
     inputs = [
+        CustomInput(
+            name="flows",
+            display_name="Select Flows",
+            modal="json-form-page.html",
+            info="Click here to input Flows to run",
+            dynamic=True,
+            real_time_refresh=True),
+            
         MessageTextInput(
-            name="input_value",
+            name="flows_to_run",
             display_name="Flows to Run",
             info="This is input accepts only valid flows that exist in the LangFlow server. \n Removes inputs that are invalid Flows or duplicate Flows.",
-            value="Test Flow",
+            value=["Test Flow"],
             is_list=True,
             tool_mode=True,
             real_time_refresh=True,
@@ -93,23 +101,12 @@ class FlowRunnerAPI(Component):
             real_time_refresh=True,
             info="."
         ),
-        MessageTextInput(
+        IntInput(
             name="retries",
             display_name="Retry Count",
-            value=["0"],
-            dynamic=True,
-            is_list=True,
-            info=".",
-            advanced=True,
+            value=0,
+            advanced=True
         ),
-        CustomInput(
-            name="flows",
-            display_name="Popup Form",
-            modal="json-form-page.html",
-            info="Click here to input Flows to run",
-            dynamic=True,
-            real_time_refresh=True),
-        
         MessageTextInput(
             name="LangflowAPI",
             display_name="Langflow API key (optional)",
@@ -123,14 +120,6 @@ class FlowRunnerAPI(Component):
             display_name="URL of the API to call",
             value="",
             info="URL of the Langflow API to call",
-            advanced=True,
-            show=True,
-        ),
-        MessageTextInput(
-            name="payload",
-            display_name="input_payload",
-            value="",
-            info="Name of the Flow to run",
             advanced=True,
             show=True,
         ),
@@ -174,7 +163,7 @@ class FlowRunnerAPI(Component):
             if flow_data.data["name"] == flow_name_selected:
                 self.log(flow_data, "Flow Data:")
                 return flow_data
-                
+
         return None
 
 
@@ -237,12 +226,10 @@ class FlowRunnerAPI(Component):
         for idx, flow_name_selected in enumerate(flows_to_run):
             if flow_name_selected == "" or flow_name_selected is None: continue
             self.log(idx)
-            new_flow = FlowAPI("http://langflow.languagestudio.com:3001")
-            if(idx==1): new_flow.set_flow_id("1234")
-            else: new_flow.set_flow_id("cd625a2d-41c8-4f55-ad45-a3741bb7989e")
+            new_flow = FlowAPI(self._attributes.get("API_URL"))
+            new_flow.set_flow_id("8e0c444a-6d9f-43e4-8351-96426e50d569")
             new_flow.add_payload("input_value", input_value)
             new_flow.prepare_default_payload()
-            new_flow.add_Langflow_API_key("sk-8Ug6pxMHtKk6uVKGslRJ1uFMBi4wvgHr7YiRtJJt-5w")
             
 
             list_of_flows.append(new_flow)
@@ -281,6 +268,8 @@ class FlowRunnerAPI(Component):
         for flow in flows:
             if isinstance(flow, FlowAPI):
                 if (flow.is_response_ready):
+                    print(flow.collect_response())
+                    
                     results = merge_string_to_dict(flow.collect_response(), results)
                 else:
                     self.log(flow.get_flow_name(), "Is not completed")
@@ -304,17 +293,21 @@ class FlowRunnerAPI(Component):
         """
         
         # When Flows are updated, validate them
-        if field_name == "input_value":
-            build_config["input_value"]["value"] = await self.validate_flows(build_config["input_value"]["value"])
+        if field_name == "flows_to_run":
+            build_config["flows_to_run"]["value"] = await self.validate_flows(build_config["flows_to_run"]["value"])
             return build_config
             
         if field_name == "flows":
             flow_to_add = await self.get_value_from_str_dict(build_config["flows"]["value"], "name")
+            uuid_to_add = "1234"
 
             if flow_to_add: 
-                updated_flows = build_config["input_value"]["value"]
+                updated_flows = build_config["flows_to_run"]["value"]
                 updated_flows.append(flow_to_add)
-                build_config["input_value"]["value"] = await self.validate_flows(updated_flows)
+                flow_uuid = build_config["flow_uuid"]["value"]
+                flow_uuid.append(uuid_to_add)
+                build_config["flows_to_run"]["value"] = await self.validate_flows(updated_flows)
+                build_config["flow_uuid"]["value"] = flow_uuid
                 build_config["flows"]["value"] = ""
                 
         return build_config
@@ -331,7 +324,7 @@ class FlowRunnerAPI(Component):
             Data: Final structured output with results of all processed flows.
         """
         
-        flows_selected = self._attributes.get("input_value")
+        flows_selected = self._attributes.get("flows_to_run")
         
         # flow = FlowAPI("http://langflow.languagestudio.com:3001", "run", "v1")
         # flow.prepare_default_payload()
@@ -370,3 +363,4 @@ class FlowRunnerAPI(Component):
         self.log(output, "output")
         
         return Data(data=output)
+
