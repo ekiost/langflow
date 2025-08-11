@@ -1,7 +1,7 @@
 import requests
 import json
 
-class LanguageStudioAPI:
+class APICaller:
     """
     A class to interact with the Language Studio API to retrieve flow profile details.
     """
@@ -160,16 +160,19 @@ class LanguageStudioAPI:
             return self._result['guid']
         return f"Flow profile GUID {flow_id} not found in the response."
         
-# Example usage:
-flow_id_to_query = "551"
-query = LanguageStudioAPI()
+if __name__ == "__main__":
+    # Example usage
+    flow_id_to_query = "551"
+    query = APICaller()
 
-print(f"Flow Profile ID: {query.get_flow_profile_id(flow_id_to_query)}")
-print(f"Flow Profile Name: {query.get_flow_profile_name(flow_id_to_query)}")
-print(f"Flow Profile GUID: {query.get_flow_profile_guid(flow_id_to_query)}")
+    print(f"Flow Profile ID: {query.get_flow_profile_id(flow_id_to_query)}")
+    print(f"Flow Profile Name: {query.get_flow_profile_name(flow_id_to_query)}")
+    print(f"Flow Profile GUID: {query.get_flow_profile_guid(flow_id_to_query)}")
 
-
-
+    # You can also print the entire dictionary
+    profile_details = query._get_results_from_response()
+    print("\nFull extracted dictionary:")
+    print(profile_details)
 
 # You can also print the entire dictionary
 # print("\nFull extracted dictionary:")

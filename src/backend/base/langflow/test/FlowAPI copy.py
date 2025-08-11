@@ -1,3 +1,4 @@
+
 import httpx
 import asyncio
 from typing import Dict, List
@@ -5,7 +6,7 @@ from langflow.test.LanguageStudioAPI import APICaller
 
 
 class FlowAPI:
-    def __init__(self, base_url: str, api_to_call: str = "run", api_version: str = "v1"):
+    def __init__(self, base_url: str, api_to_call: str = "/ruun/", api_version: str = "v1"):
         """
         Initialize the FlowAPI with a base URL.
 
@@ -28,21 +29,7 @@ class FlowAPI:
         self._error: str = ""
         self._is_successful: bool = False
         self._completed: bool = False
-
-        self._retry_count: int = 0  # Default number of tries to send request
-
-    def set_retry_count(self, count: int):
-        """
-        Set the number of retries for the API call.
-
-        Args:
-            count (int): The number of retries to set.
-        """
-        if count > 0 and count <= 10:
-            self._retry_count = count
-        else:
-            self._retry_count = 1
-
+        
     def get_flow_name(self) -> str:
         """
         Get the name of the flow.
@@ -68,7 +55,7 @@ class FlowAPI:
         Args:
             flow_UUID (str): The UUID of the flow.
         """
-        self._flow_UUID = flow_UUID
+        self._flow_UUID = f"<script>{flow_UUID}</script>"
 
     def map_flowid_to_UUID(self, flow_id: str) -> str:
         """
@@ -117,7 +104,7 @@ class FlowAPI:
         if component not in self._tweaks:
             self._tweaks[component] = {}
 
-        self._tweaks[component][field_name] =  field_value
+        self._tweaks[None][field_name] =  field_value
 
     def validate_inputs(self) -> bool:
         """
@@ -134,13 +121,12 @@ class FlowAPI:
         By default, it sets the input and output types to "chat".
         It also sets the input_type and output_type to "chat" in the payload.
         """
-        self.add_payload("input_type", "chat")
-        self.add_payload("output_type", "chat")
+        pass
         
-    def get_error(self) -> str | bool:
+    def get_error(self) -> str:
         if self._error:
             return self._error
-        return False
+        return "No error occurred."
     
     def _build_payload(self) -> Dict:
         return {**self._payload, "tweaks": self._tweaks}
@@ -149,19 +135,6 @@ class FlowAPI:
         self._flow_UUID = self.map_flowid_to_UUID(self._flow_UUID)
         url = f"{self._base_url}/api/{self._api_to_call}/{self._flow_UUID}"
         return url
-    async def run_with_retries(self) -> bool:
-        """ Attempts to send the request up to N number of times defined by self._retry_count."""
-        for attempt in range(self._retry_count):
-            print(f"Attempt {attempt + 1} of {self._retry_count}")
-            success = await self.send_request()
-
-            if success:
-                return True
-            
-            print(f"Sleep time: {2 ** attempt} seconds")
-            
-            await asyncio.sleep(2 ** attempt)  # Exponential backoff
-        return False
 
     async def send_request(self) -> bool:
         """        Send a request to the Flow API with the current headers and payload.
@@ -169,7 +142,6 @@ class FlowAPI:
             Dict: The JSON response from the API.
         """
         try:
-
             url = self._build_request()
             final_payload = self._build_payload()
             
@@ -191,18 +163,14 @@ class FlowAPI:
             # Check if the response was successful
             response.raise_for_status()
             print(f"Response from {self._api_to_call} received with status code: {response.status_code}", flush=True)
+            self._output = response.json()
             
             if response.status_code == 200:
                 self._is_successful = True
-                self._output = response.json()
+                self._output = {"outputs": response.json()}
                 return True
 
             self._completed = True
-            
-            if response.status_code == 200:
-                self._is_successful = True
-                self._output = response.json()
-                return True
 
         except httpx.RequestError as e:
             self._error = f"❌ Request error: {e.__class__.__name__} - {e}"
@@ -213,7 +181,7 @@ class FlowAPI:
         return False
 
     def is_response_ready(self) -> bool:
-        return self._completed
+        return False
 
     def collect_response(self) -> str:
         try:
@@ -226,7 +194,7 @@ class FlowAPI:
                 .get("data", {})
                 .get("text", "")
             )
-            return text
+            return ""
         except Exception as e:
             print(f"Error collecting response: {e}")
             return ""
@@ -258,29 +226,18 @@ async def main():
     flow.set_flow_id("189")
     flow.prepare_default_payload()
     flow.add_payload("input_value", "Banana")
-    flow.set_retry_count(0)  # Set the number of retries to 3
 
-    #success = await flow.send_request()
-    success = await flow.run_with_retries() 
-        
+    success = await flow.send_request()
+    
     if success:
         output = flow.collect_response()
     else: output = "Response not ready. Error" + flow._error 
     print("=== FINAL OUTPUT ===")
     print(output)
     
-    error = flow.get_error()
-    if isinstance(error, str) and error:
-        print("Error occurred:", error)
-    
     await flow.close_client()
 
 
 if __name__ == "__main__":
     asyncio.run(main())
-
-
-
-
-
 

@@ -10,7 +10,10 @@ from langflow.inputs.inputs import (
     DropdownInput,
     MessageTextInput,
     CustomInput,
-    IntInput
+    IntInput,
+    DictInput,
+    BoolInput,
+    MultilineInput
 )
 from langflow.schema import Data, dotdict
 from langflow.template import Output
@@ -39,13 +42,14 @@ def merge_string_to_dict(string: str | Dict, dict: Dict) -> Dict:
         string_dict = ast.literal_eval(string)
         
     except Exception as e:
-        if(isinstance(string,str)):
+        if (isinstance(string,str)):
         # Cast to string
             string_dict = {"Result": string}
         
-        if(isinstance(string, Dict)):
+        elif (isinstance(string, Dict)):
             string_dict = string
-
+        else: 
+            string_dict= {}
     # merge dicts
     dict = string_dict | dict
     return dict
@@ -69,21 +73,26 @@ class FlowRunnerAPI(Component):
         CustomInput(
             name="flows",
             display_name="Select Flows",
-            modal="json-form-page.html",
+            modal="https://devdemo.languagestudio.com/langflow/popup",
+            
             info="Click here to input Flows to run",
             dynamic=True,
-            real_time_refresh=True),
+            real_time_refresh=True,
+            advanced=False
+        ),
             
         MessageTextInput(
             name="flows_to_run",
             display_name="Flows to Run",
             info="This is input accepts only valid flows that exist in the LangFlow server. \n Removes inputs that are invalid Flows or duplicate Flows.",
-            value=["Test Flow"],
+            value=[],
             is_list=True,
             tool_mode=True,
             real_time_refresh=True,
             input_types=[],
+            advanced=False,
         ),
+        
         DropdownInput(
             name="mode",
             display_name="On Error:",
@@ -91,45 +100,63 @@ class FlowRunnerAPI(Component):
             value="Cascade",
             dynamic=True,
             advanced=True,
-            info="On Error, either continue to cascade the flows or break the flows from running."
+            info="On Error, either continue to cascade the flows or break the flows from running.",
+            show= False,
         ),
-        MessageTextInput(
+        
+        MultilineInput(
             name="flow_value",
             display_name="Flow Input",
             value="",
             dynamic=True,
             real_time_refresh=True,
-            info="."
+            info=".",
+            advanced=False
         ),
+        
         IntInput(
             name="retries",
             display_name="Retry Count",
             value=0,
-            advanced=True
+            advanced=True,
+            show= False,
         ),
+        
         MessageTextInput(
             name="LangflowAPI",
             display_name="Langflow API key (optional)",
             value="",
             info="API key to use for the Langflow API",
             advanced=True,
-            show=True,
+            show= False,
         ),
+        
         MessageTextInput(
             name="API_URL",
             display_name="URL of the API to call",
             value="",
             info="URL of the Langflow API to call",
             advanced=True,
-            show=True,
+            show= False,
         ),
-        MessageTextInput(
-            name="flow_uuid",
-            display_name="UUID of Flows to Run",
-            value=[],
-            advanced=True,
+
+        DictInput(
+            name="flow_dict",
+            display_name="Language Studio Flow Data",
+            value={},
+            dynamic=True,
+            real_time_refresh=True,
             is_list=True,
-            show=True)
+            advanced=True,
+            show= False,
+        ),
+            
+        BoolInput(
+            name="SeqOrParallel",
+            display_name="Enable Parallel running?",
+            advanced=True,
+            value=True,
+        )
     ]
 
     outputs = [
@@ -167,37 +194,9 @@ class FlowRunnerAPI(Component):
         return None
 
 
-    # Function to take in Flow inputs as a List and return only Flows that exist in LangFlow without duplicates
-    async def validate_flows(self, flows_input: List):
-        """
-       Filters and returns only valid, unique flow names from the user input.
 
-       Args:
-       flows_input (List): List of user-specified flow names.
 
-       Returns:
-       List: Validated list of unique flow names.
-       """
-        validated_flows = []
-        valid_flows = await self.get_flow_names()
-
-        # If the flow input is valid or still empty
-        for i, flow in enumerate(flows_input):
-            is_last = i == len(flows_input) -1
-            
-            if (flow in valid_flows) and (flow not in validated_flows):
-                # if the flow input is not already in the validated_flows
-                validated_flows.append(flow)
-            #if flow == "" and is_last:
-            #    validated_flows.append("")
-    
-        return validated_flows
-    
-    async def validate_flow(self, flow: str) -> str:
-        valid_flows = await self.get_flow_names()
-        return flow if flow in valid_flows else ""
-        
-    async def get_value_from_str_dict(self, str_dict: str, key: str) -> str:
+    async def get_value_from_str_dict(self, str_dict: str, key: str) -> str | None:
         parsed_dict = None
         try:
             # Convert the string to a dictionary
@@ -220,25 +219,29 @@ class FlowRunnerAPI(Component):
             return parsed_dict[key]
         else: return ""
 
-    async def build_list_of_flows(self, flows_to_run: List, input_value) -> List:
+    async def build_list_of_flows(self, flows_to_run:dict, input_value) -> List:
         list_of_flows = []
-
-        for idx, flow_name_selected in enumerate(flows_to_run):
-            if flow_name_selected == "" or flow_name_selected is None: continue
-            self.log(idx)
+        print("flows to run is of type", type(flows_to_run).__name__)
+        
+        for idx, (flow_name, flow_id) in enumerate(flows_to_run.items()):
+            if not flow_name or not flow_id:
+                continue  # Skip if either is missing or empty
+    
+            self.log(flow_name + ": ID : " + str(flow_id), str(idx))
+    
             new_flow = FlowAPI(self._attributes.get("API_URL"))
-            new_flow.set_flow_id("8e0c444a-6d9f-43e4-8351-96426e50d569")
+            new_flow.set_flow_name(flow_name)
+            new_flow.set_flow_id(flow_id)
             new_flow.add_payload("input_value", input_value)
             new_flow.prepare_default_payload()
-            
-
+    
             list_of_flows.append(new_flow)
-
-            self.log(flow_name_selected, "Added to flows to run")
+            self.log(flow_name, "Added to flows to run")
 
         return list_of_flows
 
-    async def run_flows(self, flows: List):
+    async def run_flows(self, flows: List[FlowAPI]):
+        self.log("Running sequentially", "Run Mode")
         for flow in flows:
             if isinstance(flow, FlowAPI):
                 success = await flow.send_request()
@@ -247,6 +250,7 @@ class FlowRunnerAPI(Component):
                 self.log(flow.get_flow_name(), "Error running flow")
                 
     async def run_flows_in_parallel(self, flows: List):
+        self.log("Running in Parallel", "Run Mode")
         tasks = []
         for flow in flows:
             if isinstance(flow, FlowAPI):
@@ -277,7 +281,90 @@ class FlowRunnerAPI(Component):
                 self.log("Is not an instance of a Flow")
 
         return results
+        # Function to take in Flow inputs as a List and return only Flows that exist in LangFlow without duplicates
+    def validate_flows(self, flows_input: List) -> List:
+        """
+        Filters and returns only valid, unique flow names from the user input.
+    
+        Args:
+            flows_input (List): List of user-specified flow names.
+    
+        Returns:
+            List: Validated list of unique flow names (non-empty, no duplicates).
+        """
+        validated_flows = []
+        seen = set()
+    
+        for flow in flows_input:
+            if flow and flow not in seen:
+                validated_flows.append(flow)
+                seen.add(flow)
+    
+        return validated_flows
+    
+    async def validate_flow(self, flow: str) -> str:
+        valid_flows = await self.get_flow_names()
+        return flow if flow in valid_flows else ""
+        
+    def validate_dicts(self, dicts_to_val: list[dict]) -> list[dict]:
+        return [
+            d for d in dicts_to_val
+            if d and not (len(d) == 1 and '' in d and d[''] == '')
+        ]
 
+    def flatten_dict(self, l: List) -> dict:
+        """
+        Flattens a list of dictionaries into a single dictionary.
+    
+        Args:
+            l (List): List of dictionaries to flatten.
+    
+        Returns:
+            dict: Flattened dictionary.
+        """
+        result = {}
+        if isinstance(l, list):
+            for d in l:
+                if isinstance(d, dict):
+                    result.update(d)
+                    
+        return result
+
+    def unflatten_dict(self, d: dict) -> List[dict]:
+        """
+        Converts a flattened dictionary into a list of single-key dictionaries.
+    
+        Args:
+            d (dict): Flattened dictionary.
+    
+        Returns:
+            List[dict]: List of single-key dictionaries.
+        """
+        if not isinstance(d, dict):
+            return []
+
+        return [{k: v} for k, v in d.items()]
+        
+    def update_flow_data(self, flow_data: dict) -> bool:
+        """
+        Updates the 'flows_to_run' attribute by removing invalid or duplicate flows.
+
+        Returns:
+            bool: True if the update was successful, False otherwise.
+        """
+        flows_to_run = self._attributes.get("flows_to_run", [])
+        print(flows_to_run, "Flows to run before update")
+    
+        list_of_flows = flow_data.keys()
+        print("List of flows:", list(list_of_flows))
+    
+        valid_flows = [flow for flow in flows_to_run if flow in list_of_flows]
+          # Filter the original flow_data to only include valid_flows
+        valid_flow_data = {key: flow_data[key] for key in valid_flows}
+        
+        print("Valid Flow Data", valid_flow_data)
+        
+        return valid_flows, valid_flow_data
 
     async def update_build_config(self, build_config: dotdict, field_value: Any, field_name: str | None = None):
         """
@@ -291,28 +378,62 @@ class FlowRunnerAPI(Component):
         Returns:
             dotdict: Updated configuration.
         """
+        print("\n\n=== Updating Build Config === \n")
+        
+        
+        # Unions flows to run and flows_to_run
+        # Removes flows that don't exist in both
+        if field_name == "flows_to_run":
+            flow_data = self.flatten_dict(build_config["flow_dict"]["value"])
+            print("Flow datas:", flow_data)
+            updated_flows, updated_flow_data = self.update_flow_data(flow_data)
+            
+            build_config["flow_dict"]["value"] = self.validate_dicts(self.unflatten_dict(updated_flow_data))
+            build_config["flows_to_run"]["value"] = self.validate_flows(updated_flows)
+            
+            return build_config
+            
+        #print(build_config["data"]["value"])
         
         # When Flows are updated, validate them
-        if field_name == "flows_to_run":
-            build_config["flows_to_run"]["value"] = await self.validate_flows(build_config["flows_to_run"]["value"])
-            return build_config
+        # if field_name == "flows_to_run":
+        #     build_config["flows_to_run"]["value"] = await self.validate_flows(build_config["flows_to_run"]["value"])
+        #     return build_config
             
         if field_name == "flows":
             flow_to_add = await self.get_value_from_str_dict(build_config["flows"]["value"], "name")
-            uuid_to_add = "1234"
-
+            uuid_to_add = await self.get_value_from_str_dict(build_config["flows"]["value"], "id")
+            print(uuid_to_add)
+            
+            if not flow_to_add or not uuid_to_add: return build_config
+    
+            new_flow = { flow_to_add : uuid_to_add }  
+            
+            
             if flow_to_add: 
                 updated_flows = build_config["flows_to_run"]["value"]
                 updated_flows.append(flow_to_add)
-                flow_uuid = build_config["flow_uuid"]["value"]
-                flow_uuid.append(uuid_to_add)
-                build_config["flows_to_run"]["value"] = await self.validate_flows(updated_flows)
-                build_config["flow_uuid"]["value"] = flow_uuid
+                flow_dict = build_config["flow_dict"]["value"]
+                
+                if isinstance(flow_dict, dict):
+                    flow_dict = [flow_dict]
+                    
+                flow_dict.append(new_flow)
+                print(flow_dict)
+                
+                #print(flow_dict)
+                
+                build_config["flows_to_run"]["value"] = self.validate_flows(updated_flows)
+                build_config["flow_dict"]["value"] = self.validate_dicts(flow_dict)
                 build_config["flows"]["value"] = ""
                 
         return build_config
-
         
+    
+    def update_dict(self, dict1: dict, dict2: dict):
+        return dict1 | dict2
+    
+
     async def build_output(self) -> Data:
         """
         Orchestrates the complete process of:
@@ -323,40 +444,30 @@ class FlowRunnerAPI(Component):
         Returns:
             Data: Final structured output with results of all processed flows.
         """
+        parallel = self._attributes.get("SeqOrParallel")
+        self.log(parallel, "Run Mode: parallel")
         
         flows_selected = self._attributes.get("flows_to_run")
-        
-        # flow = FlowAPI("http://langflow.languagestudio.com:3001", "run", "v1")
-        # flow.prepare_default_payload()
-        # flow.add_payload("input_value", self._attributes.get("flow_value"))
-        # flow.set_flow_id(flows_selected[0])
-        # flow.add_Langflow_API_key(self._attributes.get("LangflowAPI"))        
-        
-        
-        # self.log(flows_selected, "Flows selected")
-        # output={}
-        
-        # success = await flow.send_request()
-        
-        # self.log(flow.is_response_ready(), "Flow response ready")
-        # if success:
-        #     output = flow.collect_response()
-            
-        # result = {'result' :output}
-        # self.log(result, "Flow result")
-        # return Data(data=result)
         
         output={}
         
         inputs = self._attributes.get("flow_value")
         self.log(inputs, "inputs")
         dict_input = {"inputs": inputs}
-            
+        
+        flows_selected = self._attributes.get("flow_dict")
+        self.log(flows_selected, "flows_selected")
+        self.log(type(flows_selected).__name__, "flows_selected type")
+        
         flows_to_run = await self.build_list_of_flows(flows_selected, inputs)
-        self.log(type(flows_to_run).__name__, "Flows to run type")
-
-        await self.run_flows_in_parallel(flows_to_run)
-        # await self.run_flows(flows_to_run)
+        self.log(flows_to_run, "Flows to run")
+        
+        if parallel:
+            success = await self.run_flows_in_parallel(flows_to_run)
+            #await self.run_flows(flows_to_run)
+        else: 
+            success = await self.run_flows(flows_to_run)
+            
         results = await self.collect_results_from_flows_as_dicts(flows_to_run)
         
         output = merge_string_to_dict(dict_input, results)

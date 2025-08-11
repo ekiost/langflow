@@ -279,31 +279,37 @@ class FlowRunner(Component):
         Returns:
             Data: Final structured output with results of all processed flows.
         """
-        flow = FlowAPI("http://langflow.languagestudio.com:3001", "run", "v1")
+        # flow = FlowAPI("http://langflow.languagestudio.com:3001", "run", "v1")
         
-        flows_selected = self._attributes.get("input_value")
-        self.log(flows_selected, "Flows selected")
+        # flows_selected = self._attributes.get("input_value")
+        # self.log(flows_selected, "Flows selected")
         
-        await self.get_flow(flows_selected[0])
+        # await self.get_flow(flows_selected[0])
         
-        inputs = self._attributes.get("flow_value")
-        self.log(inputs, "inputs")
+        # inputs = self._attributes.get("flow_value")
+        # self.log(inputs, "inputs")
         
-        flows_to_run = await self.build_list_of_flows(flows_selected, inputs)
-        self.log(type(flows_to_run).__name__, "Flows to run type")
+        # flows_to_run = await self.build_list_of_flows(flows_selected, inputs)
+        # self.log(type(flows_to_run).__name__, "Flows to run type")
 
-        await self.run_flows(flows_to_run)
-        results = await self.collect_results_from_flows_as_dicts(flows_to_run)
+        # await self.run_flows(flows_to_run)
+        # results = await self.collect_results_from_flows_as_dicts(flows_to_run)
         
-        #output = merge_string_to_dict(inputs, results)
-        output = results
-        self.log(output, "output")
+        # #output = merge_string_to_dict(inputs, results)
+        # output = results
+        # self.log(output, "output")
         
-        print(self.demo.something())
-        # output = {}
+        # print(self.demo.something())
+        # # output = {}
         
-        # output["Output"] = await self.get_value_from_str_dict(self.flows, "name")
+        # # output["Output"] = await self.get_value_from_str_dict(self.flows, "name")
+        self.graph.context({"Banana":"fruit"})
         
-        return Data(data=output)
+        dotdict_output = self.graph.context().get("Banana", "No Banana found")
+        output = dotdict_output.get("Banana")
+        
+        dict_output = {"Output": output}
+        
+        return Data(data=dict_output)
 
 

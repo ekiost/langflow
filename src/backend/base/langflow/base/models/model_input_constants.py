@@ -254,7 +254,7 @@ try:
         "prefix": "",
         "component_class": AmazonBedrockComponent(),
         "icon": AmazonBedrockComponent.icon,
-        "is_active": False,
+        "is_active": True,
     }
 except ImportError:
     pass

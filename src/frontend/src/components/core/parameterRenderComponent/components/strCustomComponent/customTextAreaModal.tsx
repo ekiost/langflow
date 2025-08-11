@@ -1,9 +1,9 @@
 import IconComponent from "@/components/common/genericIconComponent";
-import {Button} from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import BaseModal from "@/modals/baseModal";
-import React, {ReactNode, useEffect, useRef, useState} from "react";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
 import IframeJsonForm from "./iframeJsonForm"; // Import the new iframe component
-import {useDarkStore} from "@/stores/darkStore";
+import { useDarkStore } from "@/stores/darkStore";
 
 interface CustomTextAreaModalProps {
     value: string;
@@ -18,8 +18,8 @@ interface CustomTextAreaModalProps {
 // For security, specify the origin of the iframe's content.
 // If served from the same domain, this is correct. For external domains,
 // use the specific origin (e.g., "https://forms.example.com").
-const IFRAME_ORIGIN = window.location.origin;
-// const IFRAME_ORIGIN = "https://devdemo.languagestudio.com";
+// const IFRAME_ORIGIN = window.location.origin;
+const IFRAME_ORIGIN = "https://devdemo.languagestudio.com";
 
 
 /*
@@ -54,14 +54,14 @@ const IFRAME_ORIGIN = window.location.origin;
 */
 
 export default function CustomTextAreaModal({
-                                                value,
-                                                setValue,
-                                                children,
-                                                disabled = false,
-                                                readonly = false,
-                                                onCloseModal,
-                                                modal,
-                                            }: CustomTextAreaModalProps): React.ReactElement {
+    value,
+    setValue,
+    children,
+    disabled = false,
+    readonly = false,
+    onCloseModal,
+    modal,
+}: CustomTextAreaModalProps): React.ReactElement {
     const [modalOpen, setModalOpen] = useState(false);
     const [isIframeReady, setIsIframeReady] = useState(false);
     const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -76,7 +76,22 @@ export default function CustomTextAreaModal({
 
             const data = event.data;
             console.log("Received message from iframe:", data);
-            if (!data || typeof data.type !== "string") return;
+            // if (!data || typeof data.type !== "string") return;
+            if (!data) return;
+
+
+            if (data && data.id && data.name) {
+                console.log("Received message with id, name, and langflowid:", data.id, data.name, data.langflowid);
+
+                const formData = {
+                    id: data.id,
+                    name: data.name,
+                    langflowid: data.langflowid || ""
+                };
+
+                handleSave(formData);
+                return;
+            }
 
             switch (data.type) {
                 case "ready":
@@ -90,7 +105,7 @@ export default function CustomTextAreaModal({
                     // Send dark mode state immediately when the iframe is ready
                     if (iframeRef.current?.contentWindow) {
                         iframeRef.current.contentWindow.postMessage({
-                            type: "darkMode", payload: {dark}
+                            type: "darkMode", payload: { dark }
                         }, IFRAME_ORIGIN,);
                     }
                     break;
@@ -118,10 +133,10 @@ export default function CustomTextAreaModal({
         if (modalOpen && isIframeReady && iframeRef.current?.contentWindow) {
             try {
                 const initialData = value && value.trim() ? JSON.parse(value) : {};
-                iframeRef.current.contentWindow.postMessage({type: "load", payload: initialData}, IFRAME_ORIGIN,);
+                iframeRef.current.contentWindow.postMessage({ type: "load", payload: initialData }, IFRAME_ORIGIN,);
             } catch (e) {
                 console.error("Failed to parse initial value for iframe:", e);
-                iframeRef.current.contentWindow.postMessage({type: "load", payload: {}}, IFRAME_ORIGIN,);
+                iframeRef.current.contentWindow.postMessage({ type: "load", payload: {} }, IFRAME_ORIGIN,);
             }
         }
     }, [modalOpen, isIframeReady, value]);
@@ -135,7 +150,7 @@ export default function CustomTextAreaModal({
     // Effect to send dark mode state to iframe when it changes
     useEffect(() => {
         if (modalOpen && isIframeReady && iframeRef.current?.contentWindow) {
-            iframeRef.current.contentWindow.postMessage({type: "darkMode", payload: {dark}}, IFRAME_ORIGIN,);
+            iframeRef.current.contentWindow.postMessage({ type: "darkMode", payload: { dark } }, IFRAME_ORIGIN,);
         }
     }, [modalOpen, isIframeReady, dark]);
     const handleSave = (formData: any) => {
@@ -146,7 +161,7 @@ export default function CustomTextAreaModal({
 
     const handleReset = () => {
         if (iframeRef.current?.contentWindow) {
-            iframeRef.current.contentWindow.postMessage({type: "reset"}, IFRAME_ORIGIN,);
+            iframeRef.current.contentWindow.postMessage({ type: "reset" }, IFRAME_ORIGIN,);
         }
     };
 
@@ -171,8 +186,8 @@ export default function CustomTextAreaModal({
                         aria-hidden="true"
                     />
                     <span className="pl-2" data-testid="custom-modal-title">
-              Configure Input
-            </span>
+                        Configure Input
+                    </span>
                 </div>
             </div>
         </BaseModal.Header>
@@ -211,7 +226,7 @@ export default function CustomTextAreaModal({
                         Cancel
                     </Button>
                     <Button
-                        onClick={() => iframeRef.current?.contentWindow?.postMessage({type: "requestSave"}, // Ask iframe to save
+                        onClick={() => iframeRef.current?.contentWindow?.postMessage({ type: "requestSave" }, // Ask iframe to save
                             IFRAME_ORIGIN,)}
                         disabled={readonly}
                         data-testid="save-button"
