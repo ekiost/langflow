@@ -50,7 +50,7 @@ def merge_string_to_dict(string: str, dict: Dict) -> Dict:
     return dict
 
 
-class FlowRunner(Component):
+class FlowRunnerComponent(Component):
     display_name = "Flow Runner (Upgraded)"
     description = "Component to run multiple flows sequentially.\n Removes invalid and duplicate flows to run."
     documentation: str = "https://docs.langflow.org/components-custom-components"

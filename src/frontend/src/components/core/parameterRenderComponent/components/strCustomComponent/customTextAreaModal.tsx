@@ -19,7 +19,13 @@ interface CustomTextAreaModalProps {
 // If served from the same domain, this is correct. For external domains,
 // use the specific origin (e.g., "https://forms.example.com").
 // const IFRAME_ORIGIN = window.location.origin;
-const IFRAME_ORIGIN = "https://devdemo.languagestudio.com";
+
+const IFRAME_ORIGIN = (window.location.hostname).replace(/:\d+$/, '');
+// Get the SLD (Second Level Domain)
+const SLD = IFRAME_ORIGIN.split(".").slice(-2).join(".");
+
+// For Dev purposes
+// const IFRAME_ORIGIN = "https://devdemo.languagestudio.com";
 
 
 /*
@@ -72,7 +78,18 @@ export default function CustomTextAreaModal({
     // Effect to handle messages received from the iframe
     useEffect(() => {
         const handleMessage = (event: MessageEvent) => {
-            if (event.origin !== IFRAME_ORIGIN) return;
+            // Extract the event's SLD, filtering out port number (if any)
+            const event_SLD = (event.origin.split("/")[2].split(".").slice(-2).join(".")).replace(/:\d+$/, '');
+
+            // Debug messages
+            // console.log("Received message from origin:", event.origin);
+            // console.log("event SLD:", event_SLD);
+            // console.log("My SLD:", SLD);
+
+
+            // Return if the event's SLD does not match host SLD
+            if (event_SLD !== SLD) return;
+
 
             const data = event.data;
             console.log("Received message from iframe:", data);

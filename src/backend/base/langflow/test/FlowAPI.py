@@ -29,7 +29,7 @@ class FlowAPI:
         self._is_successful: bool = False
         self._completed: bool = False
 
-        self._retry_count: int = 0  # Default number of tries to send request
+        self._retry_count: int = 0  # Default number of tries to send request (0 means try only once)
 
     def set_retry_count(self, count: int):
         """
@@ -149,6 +149,7 @@ class FlowAPI:
         self._flow_UUID = self.map_flowid_to_UUID(self._flow_UUID)
         url = f"{self._base_url}/api/{self._api_to_call}/{self._flow_UUID}"
         return url
+    
     async def run_with_retries(self) -> bool:
         """ Attempts to send the request up to N number of times defined by self._retry_count."""
         for attempt in range(self._retry_count):
@@ -255,10 +256,10 @@ class FlowAPI:
     
 async def main():    
     flow = FlowAPI("https://devdemo.languagestudio.com:3000")
-    flow.set_flow_id("189")
+    flow.set_flow_id("592")
     flow.prepare_default_payload()
-    flow.add_payload("input_value", "Banana")
-    flow.set_retry_count(0)  # Set the number of retries to 3
+    flow.add_payload("input_value", {"Banana":"I am a banana Banana"})
+    flow.set_retry_count(5)  # Set the number of retries to 5
 
     #success = await flow.send_request()
     success = await flow.run_with_retries() 
@@ -274,7 +275,6 @@ async def main():
         print("Error occurred:", error)
     
     await flow.close_client()
-
 
 if __name__ == "__main__":
     asyncio.run(main())

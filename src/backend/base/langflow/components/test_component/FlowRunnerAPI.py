@@ -21,6 +21,8 @@ from langflow.template import Output
 from langflow.test.FlowAPI import FlowAPI
 from langflow.helpers.flow import run_flow
 from langflow.base.flow_processing.utils import build_data_from_run_outputs
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import asyncio
 
 def merge_string_to_dict(string: str | Dict, dict: Dict) -> Dict:
     """
@@ -55,7 +57,7 @@ def merge_string_to_dict(string: str | Dict, dict: Dict) -> Dict:
     return dict
 
 
-class FlowRunnerAPI(Component):
+class FlowRunnerAPIComponent(Component):
     display_name = "Flow Runner API(Upgraded)"
     description = "Component to run multiple flows sequentially.\n Removes invalid and duplicate flows to run."
     documentation: str = "https://docs.langflow.org/components-custom-components"
@@ -63,18 +65,26 @@ class FlowRunnerAPI(Component):
     name = "CustomComponent"
     icon = "FAISS"
     
-    class DemoClass():
-        def something(self):
-            return True
-    
-    demo = DemoClass()
-    
     inputs = [
+        BoolInput(
+            name="SeqOrParallel",
+            display_name="Enable Parallel running?",
+            value=False,
+            dynamic=True,
+            real_time_refresh=True,
+        ),
+        IntInput(
+            name="num_parallel_workers",
+            display_name="Set Max Number of Parallel Requests",
+            value=3,
+            show=False,
+            dynamic=True,
+            real_time_refresh=True,),
+            
         CustomInput(
             name="flows",
             display_name="Select Flows",
             modal="https://devdemo.languagestudio.com/langflow/popup",
-            
             info="Click here to input Flows to run",
             dynamic=True,
             real_time_refresh=True,
@@ -114,14 +124,6 @@ class FlowRunnerAPI(Component):
             advanced=False
         ),
         
-        IntInput(
-            name="retries",
-            display_name="Retry Count",
-            value=0,
-            advanced=True,
-            show= False,
-        ),
-        
         MessageTextInput(
             name="LangflowAPI",
             display_name="Langflow API key (optional)",
@@ -134,10 +136,10 @@ class FlowRunnerAPI(Component):
         MessageTextInput(
             name="API_URL",
             display_name="URL of the API to call",
-            value="",
+            value="https://devdemo.languagestudio.com:3000/",
             info="URL of the Langflow API to call",
             advanced=True,
-            show= False,
+            show= True,
         ),
 
         DictInput(
@@ -148,21 +150,22 @@ class FlowRunnerAPI(Component):
             real_time_refresh=True,
             is_list=True,
             advanced=True,
-            show= False,
+            show=True
         ),
-            
-        BoolInput(
-            name="SeqOrParallel",
-            display_name="Enable Parallel running?",
+        IntInput(
+            name="retries",
+            display_name="Number of API call attempts (Minimum: 1)",
+            value=1,
             advanced=True,
-            value=True,
-        )
+            show=True,
+        ),
+
     ]
 
     outputs = [
         Output(display_name="Output", name="output", method="build_output"),
     ]
-
+    
     
     async def get_flow_names(self) -> list[str]:
         """
@@ -192,9 +195,6 @@ class FlowRunnerAPI(Component):
                 return flow_data
 
         return None
-
-
-
 
     async def get_value_from_str_dict(self, str_dict: str, key: str) -> str | None:
         parsed_dict = None
@@ -233,6 +233,7 @@ class FlowRunnerAPI(Component):
             new_flow.set_flow_name(flow_name)
             new_flow.set_flow_id(flow_id)
             new_flow.add_payload("input_value", input_value)
+            new_flow.set_retry_count(int(self._attributes.get("retries")))
             new_flow.prepare_default_payload()
     
             list_of_flows.append(new_flow)
@@ -249,7 +250,7 @@ class FlowRunnerAPI(Component):
             else:
                 self.log(flow.get_flow_name(), "Error running flow")
                 
-    async def run_flows_in_parallel(self, flows: List):
+    async def run_flows_in_parallel(self, flows: List) -> None:
         self.log("Running in Parallel", "Run Mode")
         tasks = []
         for flow in flows:
@@ -257,14 +258,38 @@ class FlowRunnerAPI(Component):
                 tasks.append(flow.send_request())
             else: 
                 self.log("Non-FlowAPI object in flows list")
+                
         results = await asyncio.gather(*tasks, return_exceptions=True)
         
         for i, result in enumerate(results):
             flow = flows[i]
             if isinstance(result, Exception):
-                self.log(f"❌ Flow {i} failed with error: {result}")
+                self.log(f"Flow {i} failed with error: {result}")
             else:
-                self.log(flow.get_flow_name(), f"✅ Flow {i} completed: success = {result}")
+                self.log(flow.get_flow_name(), f"Flow {i} completed: success = {result}")
+                
+    async def run_with_futures(self, flows: List, max_workers: int = 5):
+        """
+        Runs flows in parallel using ThreadPoolExecutor.
+        
+        Args:
+            flows (List): List of FlowAPI instances to run.
+            max_workers (int): Maximum number of threads to use.
+        """
+        
+        def run_flow_sync(flow):
+        # Create a new event loop in this thread and run the async function
+            return asyncio.run(flow.run_with_retries())
+        
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            futures = {executor.submit(run_flow_sync, flow): flow for flow in flows}
+            for future in as_completed(futures):
+                flow = futures[future]
+                try:
+                    result = future
+                    self.log(f"Flow completed: {result}", flow.get_flow_name() )
+                except Exception as e:
+                    self.log(f"Flow failed with error: {e}", flow.get_flow_name())
                         
     async def collect_results_from_flows_as_dicts(self, flows: List) -> Dict[str, str]:
         results: Dict[str, str] = {}
@@ -379,11 +404,15 @@ class FlowRunnerAPI(Component):
             dotdict: Updated configuration.
         """
         print("\n\n=== Updating Build Config === \n")
+        print(f"{field_name}: {field_value}")
         
+        
+        if field_name == "SeqOrParallel":
+            build_config["num_parallel_workers"]["show"] = field_value
         
         # Unions flows to run and flows_to_run
         # Removes flows that don't exist in both
-        if field_name == "flows_to_run":
+        if field_name == "flows_to_run" or field_name == "flow_dict":
             flow_data = self.flatten_dict(build_config["flow_dict"]["value"])
             print("Flow datas:", flow_data)
             updated_flows, updated_flow_data = self.update_flow_data(flow_data)
@@ -444,7 +473,10 @@ class FlowRunnerAPI(Component):
         Returns:
             Data: Final structured output with results of all processed flows.
         """
+        
+        
         parallel = self._attributes.get("SeqOrParallel")
+        max_workers = self._attributes.get("num_parallel_workers")
         self.log(parallel, "Run Mode: parallel")
         
         flows_selected = self._attributes.get("flows_to_run")
@@ -463,12 +495,14 @@ class FlowRunnerAPI(Component):
         self.log(flows_to_run, "Flows to run")
         
         if parallel:
-            success = await self.run_flows_in_parallel(flows_to_run)
+            await self.run_with_futures(flows_to_run, max_workers=max_workers)
+            #await self.run_flows_in_parallel(flows_to_run)
             #await self.run_flows(flows_to_run)
         else: 
             success = await self.run_flows(flows_to_run)
             
         results = await self.collect_results_from_flows_as_dicts(flows_to_run)
+        self.log(results, "Results of flows run")
         
         output = merge_string_to_dict(dict_input, results)
         self.log(output, "output")

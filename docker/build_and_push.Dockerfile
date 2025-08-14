@@ -47,6 +47,9 @@ COPY ./src /app/src
 COPY src/frontend /tmp/src/frontend
 WORKDIR /tmp/src/frontend
 RUN --mount=type=cache,target=/root/.npm \
+    npm config set fetch-retry-mintimeout 20000 && \
+    npm config set fetch-retry-maxtimeout 120000 && \
+    npm config set fetch-retries 3 && \
     npm ci \
     && npm run build \
     && cp -r build /app/src/backend/langflow/frontend \
@@ -90,6 +93,8 @@ USER user
 WORKDIR /app
 
 ENV LANGFLOW_HOST=0.0.0.0
-ENV LANGFLOW_PORT=7860
+ENV LANGFLOW_PORT=3001
+
+EXPOSE 3001
 
 CMD ["langflow", "run"]
