@@ -441,15 +441,11 @@ class FlowRunnerAPIComponent(Component):
             if flow_to_add: 
                 updated_flows = build_config["flows_to_run"]["value"]
                 updated_flows.append(flow_to_add)
-                flow_dict = build_config["flow_dict"]["value"]
                 
-                if isinstance(flow_dict, dict):
-                    flow_dict = [flow_dict]
-                    
-                flow_dict.append(new_flow)
+                flow_dict = self.flatten_dict(build_config["flow_dict"]["value"])
+                flow_dict = flow_dict | new_flow
+                flow_dict = self.unflatten_dict(flow_dict)
                 print(flow_dict)
-                
-                #print(flow_dict)
                 
                 build_config["flows_to_run"]["value"] = self.validate_flows(updated_flows)
                 build_config["flow_dict"]["value"] = self.validate_dicts(flow_dict)
