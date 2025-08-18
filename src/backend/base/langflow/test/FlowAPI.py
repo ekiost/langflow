@@ -83,8 +83,8 @@ class FlowAPI:
         resolved_guiid = query.get_flow_profile_guid(flow_id)
         
         if not resolved_guiid:
-            print(f"Flow ID {flow_id} could not be resolved to a UUID.")
-            return flow_id
+            self._error = f"Flow ID {flow_id} could not be resolved to a UUID."
+            return ""
         return resolved_guiid 
 
     def add_Langflow_API_key(self, key: str):
@@ -141,7 +141,7 @@ class FlowAPI:
         if self._error:
             return self._error
         return False
-    
+
     def _build_payload(self) -> Dict:
         return {**self._payload, "tweaks": self._tweaks}
 
@@ -152,6 +152,9 @@ class FlowAPI:
     
     async def run_with_retries(self) -> bool:
         """ Attempts to send the request up to N number of times defined by self._retry_count."""
+        if not self.validate_inputs():
+            return False
+
         for attempt in range(self._retry_count):
             print(f"Attempt {attempt + 1} of {self._retry_count}")
             success = await self.send_request()
@@ -173,6 +176,9 @@ class FlowAPI:
 
             url = self._build_request()
             final_payload = self._build_payload()
+            if not self.validate_inputs():
+                return False
+            
             
             # 🔍 Print full request
             print("===== HTTP REQUEST =====")
@@ -258,21 +264,18 @@ async def main():
     flow = FlowAPI("https://devdemo.languagestudio.com:3000")
     flow.set_flow_id("592")
     flow.prepare_default_payload()
-    flow.add_payload("input_value", {"Banana":"I am a banana Banana"})
-    flow.set_retry_count(5)  # Set the number of retries to 5
+    flow.add_payload("input_value", '{"Banana":"I am a banana Banana"}')
+    flow.set_retry_count(3)  # Set the number of retries to 5
 
     #success = await flow.send_request()
     success = await flow.run_with_retries() 
         
     if success:
         output = flow.collect_response()
-    else: output = "Response not ready. Error" + flow._error 
+    else: output = "Response not ready. Error " + flow._error 
     print("=== FINAL OUTPUT ===")
     print(output)
     
-    error = flow.get_error()
-    if isinstance(error, str) and error:
-        print("Error occurred:", error)
     
     await flow.close_client()
 

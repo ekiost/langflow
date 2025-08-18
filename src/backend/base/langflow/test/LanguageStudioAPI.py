@@ -141,7 +141,7 @@ class APICaller:
             return self._result['name']
         return f"Flow profile name {flow_id} not found in the response."
 
-    def get_flow_profile_guid(self, flow_id: str) -> str:
+    def get_flow_profile_guid(self, flow_id: str) -> str | bool:
         """
         Retrieves the flow profile GUID for a given flow ID.
 
@@ -154,12 +154,12 @@ class APICaller:
         if not self._result:
             success = self._get_flow_profile_details(flow_id)
             if not success:
-                return "Failed to retrieve flow profile details."
-            
+                return False
+
         if self._result and 'guid' in self._result:
             return self._result['guid']
-        return f"Flow profile GUID {flow_id} not found in the response."
-        
+        return False
+
 if __name__ == "__main__":
     # Example usage
     flow_id_to_query = "551"

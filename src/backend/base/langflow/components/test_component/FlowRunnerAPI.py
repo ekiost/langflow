@@ -59,7 +59,7 @@ def merge_string_to_dict(string: str | Dict, dict: Dict) -> Dict:
 
 class FlowRunnerAPIComponent(Component):
     display_name = "Flow Runner API(Upgraded)"
-    description = "Component to run multiple flows sequentially.\n Removes invalid and duplicate flows to run."
+    description = "Component to run multiple flows sequentially."
     documentation: str = "https://docs.langflow.org/components-custom-components"
     icon = "code"
     name = "CustomComponent"
@@ -287,7 +287,6 @@ class FlowRunnerAPIComponent(Component):
                 flow = futures[future]
                 try:
                     result = future
-                    self.log(f"Flow completed: {result}", flow.get_flow_name() )
                 except Exception as e:
                     self.log(f"Flow failed with error: {e}", flow.get_flow_name())
                         
@@ -339,7 +338,7 @@ class FlowRunnerAPIComponent(Component):
 
     def flatten_dict(self, l: List) -> dict:
         """
-        Flattens a list of dictionaries into a single dictionary.
+        Flattens a list of dictionaries into a single dictionary. Non-recursive.
     
         Args:
             l (List): List of dictionaries to flatten.
@@ -489,10 +488,10 @@ class FlowRunnerAPIComponent(Component):
         
         flows_selected = self._attributes.get("flow_dict")
         self.log(flows_selected, "flows_selected")
-        self.log(type(flows_selected).__name__, "flows_selected type")
+        #self.log(type(flows_selected).__name__, "flows_selected type")
         
         flows_to_run = await self.build_list_of_flows(flows_selected, inputs)
-        self.log(flows_to_run, "Flows to run")
+        #self.log(flows_to_run, "Flows to run")
         
         if parallel:
             await self.run_with_futures(flows_to_run, max_workers=max_workers)
@@ -500,6 +499,11 @@ class FlowRunnerAPIComponent(Component):
             #await self.run_flows(flows_to_run)
         else: 
             success = await self.run_flows(flows_to_run)
+        
+        for flow in flows_to_run:
+            flow_error = flow.get_error() 
+            if flow_error: self.log(f"Error: {flow_error}", flow.get_flow_name())
+            else: self.log("Run successfully", flow.get_flow_name())
             
         results = await self.collect_results_from_flows_as_dicts(flows_to_run)
         self.log(results, "Results of flows run")
