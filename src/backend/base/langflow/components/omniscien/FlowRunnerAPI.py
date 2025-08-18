@@ -61,9 +61,8 @@ class FlowRunnerAPIComponent(Component):
     display_name = "Flow Runner API(Upgraded)"
     description = "Component to run multiple flows sequentially."
     documentation: str = "https://docs.langflow.org/components-custom-components"
-    icon = "code"
-    name = "CustomComponent"
-    icon = "FAISS"
+    name = "FlowRunner"
+    icon = "Omniscien"
     
     inputs = [
         BoolInput(

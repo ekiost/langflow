@@ -216,6 +216,10 @@ export const lazyIconsMapping = {
     import("@/icons/QianFanChat").then((mod) => ({
       default: mod.QianFanChatIcon,
     })),
+    
+  Omniscien: ()=>
+    import("@/icons/Omniscien").then((mod) => ({ default: mod.OmniscienIcon })),
+  
   Redis: () =>
     import("@/icons/Redis").then((mod) => ({ default: mod.RedisIcon })),
   SambaNova: () =>

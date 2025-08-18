@@ -54,11 +54,10 @@ class FlowRunnerComponent(Component):
     display_name = "Flow Runner (Upgraded)"
     description = "Component to run multiple flows sequentially.\n Removes invalid and duplicate flows to run."
     documentation: str = "https://docs.langflow.org/components-custom-components"
-    icon = "code"
+    icon = "Omniscien"
     name = "CustomComponent"
     flow_name_selected = ""
     validated_flows: List[str] = []
-    icon = "FAISS"
     
     class DemoClass():
         def something(self):

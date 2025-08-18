@@ -226,7 +226,8 @@ export const SIDEBAR_CATEGORIES = [
   { display_name: "Tools", name: "tools", icon: "Hammer" },
   { display_name: "Logic", name: "logic", icon: "ArrowRightLeft" },
   { display_name: "Helpers", name: "helpers", icon: "Wand2" },
-  { display_name: "Test Component", name: "test_component", icon: "Youtube" }
+  { display_name: "Test Component", name: "test_component", icon: "Youtube" },
+  { display_name: "Omniscien", name: "omniscien", icon: "Omniscien"}
 ];
 
 export const SIDEBAR_BUNDLES = [
