@@ -38,6 +38,9 @@ def merge_string_to_dict(string: str | Dict, dict: Dict) -> Dict:
     Raises:
     RuntimeError: If the string cannot be safely parsed.
     """
+    
+    # if the string is empty, return the Original dict
+    if not string: return dict
 
     # attempt to convert string into Dictionary structure
     try:
@@ -234,7 +237,6 @@ class FlowRunnerAPIComponent(Component):
             new_flow.add_payload("input_value", input_value)
             new_flow.set_retry_count(int(self._attributes.get("retries")))
             new_flow.prepare_default_payload()
-    
             list_of_flows.append(new_flow)
             self.log(flow_name, "Added to flows to run")
 
@@ -245,9 +247,8 @@ class FlowRunnerAPIComponent(Component):
         for flow in flows:
             if isinstance(flow, FlowAPI):
                 success = await flow.send_request()
-                self.log(flow.get_flow_name(), "Successful flow run")
             else:
-                self.log(flow.get_flow_name(), "Error running flow")
+                self.log(flow.get_flow_name(), "Error executing API request.")
                 
     async def run_flows_in_parallel(self, flows: List) -> None:
         self.log("Running in Parallel", "Run Mode")
